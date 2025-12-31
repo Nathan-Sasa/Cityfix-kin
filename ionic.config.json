@@ -1,0 +1,7 @@
+{
+  "name": "cityfix-kin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
