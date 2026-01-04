@@ -6,10 +6,91 @@
 
 <app-header [name]="profile"></app-header>
 
-<ion-content [fullscreen]="true">
-	<ion-header collapse="condense">
-		<ion-toolbar>
-			<ion-title size="large">profile</ion-title>
-		</ion-toolbar>
-	</ion-header>
+<ion-content 
+	[fullscreen]="true"
+	class="bg-clr-box!">
+
+	<div
+		class="flex justify-start items-center px-2 div-profile items-end border-b border-clr-accent/10 py-2 mx-2 mb-2">
+		<div>
+			<ion-buttons>
+				<ion-button
+					id="profile-modal"
+					class="rounded-full">
+					<ion-img
+						slot="start"
+						src="assets/images/test/test.webp"
+						class="w-30 h-30 rounded-full object-cover overflow-hidden border-4 border-clr-accent/60"
+					></ion-img>
+				</ion-button>
+			</ion-buttons>
+		</div>
+		<div
+			class="my-auto px-2">
+			<div
+				class=" flex items-center gap-1">
+				<span
+					class="text-2xl lg:text-3xl font-semibold">
+					Sage Sage 
+				</span>
+				<ion-icon 
+					name="checkmark-circle-outline" 
+					size="large"
+					class="text-clr-accent"
+				></ion-icon>
+				<ion-button
+					id="settings-modal"
+					slot="end"
+					fill="clear"
+					class="absolute settings-button">
+					<ion-icon name="settings"></ion-icon>
+				</ion-button>
+			</div>
+			<p class="text-clr-span text-xs">jonathanbikuta05@mail.com</p>
+			<div
+				class="flex items-center justify-start gap-4 py-2 pr-2 *:not-last:border-r *:border-clr-accent/30 *:not-last:pr-2 *:text-xs lg:*:text-sm *:text-center"
+				>
+				<span>
+					2 Signal(s)
+				</span>
+				<span>
+					120 Relation(s)
+				</span>
+				<span>
+					342 Track(s)
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- <ion-label
+		class="text-clr-span label-title font-semibold">
+		Compte
+	</ion-label> -->
+
+	<div
+		class="h-40 bg-clr-box-w rounded-lg">
+		<ion-list-header
+			class="text-lg font-semoibold">
+			Compte
+		</ion-list-header>
+		<ion-list
+			[inset]="true">
+			<ion-item
+				[button]="true">
+				<ion-icon name="person-circle" class="mr-2 text-2xl"></ion-icon>
+				À propos
+			</ion-item>
+			<ion-item
+			[button]="true">
+				<ion-icon name="lock-closed" class="mr-2 text-2xl"></ion-icon>
+				Mot de passe & Sécurité
+			</ion-item>
+		</ion-list>
+	</div>
+
+
+	<!-- <div>
+		<app-settings></app-settings>
+	</div> -->
 </ion-content>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, signal, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, signal, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
@@ -7,7 +7,12 @@ import { GeoLocationService } from 'src/app/core/services/geoLocation.service';
 import maplibregl from 'maplibre-gl'
 import { FeatureCollection, Point } from 'geojson';
 import { Router } from '@angular/router';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
+
+
+const map_style_light = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
+const map_style_dark = 'https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json'
 
 @Component({
 	selector: 'app-map',
@@ -31,6 +36,8 @@ export class MapPage implements OnInit {
 		page: 'map'
 	})
 
+	isDark = false
+
 	@ViewChild('mapContainer', {static: false})
 	mapContainer!: ElementRef<HTMLDivElement>
 	
@@ -38,23 +45,37 @@ export class MapPage implements OnInit {
 
 	constructor(
 		private geoLocationService: GeoLocationService,
+		private themeService: ThemeService,
 		private router: Router
-	) { }
+		// private mapService: MapService
+	) { 
+		
+	}
 
 	ngOnInit() {
+		this.themeService.isDark$.subscribe(isDark =>{
+			if(!this.maps) return
+			
+			this.maps.setStyle(
+				isDark ? map_style_dark : map_style_light
+			)
+
+			this.maps.once('styledata', () =>{
+				this.loadPoints()
+			})
+		})
 	}
 
 	ionViewDidEnter(){
 		this.initMap()
+		// this.mapService.initMap()
 	}
-
-	// ngAfterViewInit(): void {
-	// }
 	
 	initMap(){
 		this.maps = new maplibregl.Map({
 			container: this.mapContainer.nativeElement,
-			style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+			// style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+			style: this.themeService.current ? map_style_dark : map_style_light,
 			center: [15.2663, -4.4419], // les coordonées de kinshasa
 			zoom: 8
 		})
@@ -142,9 +163,9 @@ export class MapPage implements OnInit {
 						.setHTML(
 							`
 							<div
-								class="max-w-xs bg-white flex flex-col relative gap-1.5">
+								class=" bg-white flex flex-col relative gap-1.5">
 								<div
-									class="flex items-center justify-center h-40 w-full relative">
+									class="flex items-center justify-center h-24 w-full relative">
 									<img src="${image}" class="w-full h-full rounded-lg border border-clr-accent/50 object-center my-2" alt="Point Image" />
 									
 								</div>

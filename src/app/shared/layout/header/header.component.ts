@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
-import { IonContent, IonHeader, IonIcon, IonTitle, IonToolbar, IonButtons, IonButton } from '@ionic/angular/standalone';
+import { FormsModule } from '@angular/forms';
+import { IonContent, IonHeader, IonIcon, IonTitle, IonToolbar, IonButtons, IonButton, IonItem, IonToggle, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { notifications, settings } from 'ionicons/icons';
+import { ThemeService } from 'src/app/core/services/theme.service';
 
 
 
@@ -16,7 +18,12 @@ import { notifications, settings } from 'ionicons/icons';
 		IonIcon,
 		IonButtons,
 		IonButton,
-		IonToolbar
+		IonToolbar,
+		IonItem,
+		IonToggle,
+		IonLabel,
+		FormsModule
+
 	],
 	styleUrls: ['./header.component.scss'],
 })
@@ -27,10 +34,32 @@ export class HeaderComponent  implements OnInit {
 		page: 'home',
 	})
 
-	constructor() {
+	isDark = false;
+
+	constructor(
+		public themeService: ThemeService
+	) {
 		addIcons({settings, notifications})
-	 }
+	}
 
-	ngOnInit() {}
+	ngOnInit() {
+		// this.themeService.isDark$.subscribe(d => this.isDark = d)
 
+		
+	}
+
+	// toggleTheme(){
+	// 	this.themeService.toggle()
+	// }
+
+	// toggleTheme(){
+	// 	this.isDark = !this.isDark
+	// 	this.themeService.setDark(this.isDark)
+	// 	// this.upda
+	// 	console.log(localStorage.getItem('theme'))
+	// }
+
+
+
+	
 }

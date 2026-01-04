@@ -29,6 +29,7 @@ export const routes: Routes = [
 		]
 	},
 
+	// auth paths ==============================================
 	{
 		path: 'loanding',
 		loadComponent: () => import('./pages/loanding/loanding.page').then( m => m.LoandingPage)
@@ -41,10 +42,20 @@ export const routes: Routes = [
 		path: 'login',
 		loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
 	},
+
+	// map geoLocation paths =====================================
 	{
 	  path: 'geo-details/:id',
 	  loadComponent: () => import('./pages/geo-details/geo-details.page').then( m => m.GeoDetailsPage)
 	},
+
+	// profile paths ==============================================
+	{
+		path: 'settings',
+		loadComponent: ()=> import('./shared/components/settings/settings.page').then(m=> m.SettingsPage)
+	},
+
+
 	{
 		path: '',
 		pathMatch: 'full',

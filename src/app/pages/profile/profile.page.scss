@@ -1,0 +1,28 @@
+// ion-content{
+//     --background: var(--color-clr-box);
+// }
+
+.label-title{
+    margin-left: 8px !important;
+    margin-top: 8px !important;
+}
+
+ion-list-header{
+   margin-left: 16px !important;
+    font: 500 !important;
+}
+
+ion-list{
+    border-radius: 16px !important;
+    margin-top: none !important;
+    border: 1px solid var(--color-clr-span);
+}
+
+ion-item {
+  --transition: none;
+}
+
+.settings-button{
+    right: 0;
+    color: var(--color-clr-accent);
+}
