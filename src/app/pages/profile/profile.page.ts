@@ -2,12 +2,13 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
 import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.page.html',
-	styleUrls: ['./home.page.scss'],
+	selector: 'app-profile',
+	templateUrl: './profile.page.html',
+	styleUrls: ['./profile.page.scss'],
 	standalone: true,
 	imports: [
 		IonContent, 
@@ -19,16 +20,16 @@ import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
 		HeaderComponent
 	]
 })
-export class HomePage implements OnInit {
+export class ProfilePage implements OnInit {
 
-	home = signal(
-		{
-			title: 'Cityfix',
-			page: 'home'
-		}
-	)
+	profile = signal({
+		title: 'Cityfix',
+		page: 'profile'
+	})
 
-	constructor() { }
+	constructor() {
+		addIcons({})
+	 }
 
 	ngOnInit() {
 	}

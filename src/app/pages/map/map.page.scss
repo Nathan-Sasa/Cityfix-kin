@@ -1,0 +1,42 @@
+ion-content{
+    --padding-top: 0;
+    --padding-bottom: 0;
+    pointer-events: auto;
+}
+
+.map-wrapper{
+    position: absolute;
+    inset: 0;
+}
+
+.map-container{
+    // width: 100%;
+    // height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+.maplibregl-popup{
+    position: absolute !important;
+    width: 250px;
+    height: 200px;
+}
+
+.maplibregl-popup-content{
+    background: var(--ion-background-color) !important;
+    color: var(--ion-text-color) !important;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+    border: 2px solid red;
+}
+
+// .maplibregl-ctrl-top-left,
+// .maplibregl-ctrl-top-right{
+// 	top: calc(56px + env(safe-area-inset-top));
+// }
+
+// .maplibregl-ctrl-group {
+//     border-radius: 4px;
+//     background: #5242c9;
+// }

@@ -1,0 +1,86 @@
+[
+    {
+        "LocId": 1,
+        "Lng": 15.2663,
+        "Lat": -4.4419,
+        "Desc": "Route degradé par la pluie",
+        "Img": "https://deskeco.com/sites/default/files/styles/1024x578/public/2019-10/Kinshasa-1.jpg?itok=pduyGbCN",
+        "Av": "Bouvard du 30 juin",
+        "Qtr": "Basoko",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Résolu"
+    },
+    {
+        "LocId": 2,
+        "Lng": 15.3070,
+        "Lat": -4.3250,
+        "Desc": "Panneau de signalisation manquant",
+        "Img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWz8ikFPDKKmPP-Mzx6EnG4Zh_hotaY-zLyA&s",
+        "Av": "Avenue des Huileries",
+        "Qtr": "Ngaliema",
+        "Cne": "Ngaliema",
+        "Vll": "Kinshasa",
+        "stt": "Signalé"
+    },
+    {
+        "LocId": 3,
+        "Lng": 15.2420,
+        "Lat": -4.4030,
+        "Desc": "Feu de signalisation hors service",
+        "Img": "https://www.adiac-congo.com/sites/default/files/img_7984.jpg",
+        "Av": "Avenue Kasa-Vubu",
+        "Qtr": "Lingwala",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Signalé"
+    },
+    {
+        "LocId": 4,
+        "Lng": 15.2900,
+        "Lat": -4.4500,
+        "Desc": "Trottoir endommagé",
+        "Img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgXMMvN71Q4zohe4nFzxJ6fBfzCyctLggeXQ&s",
+        "Av": "Avenue de la Justice",
+        "Qtr": "Kintambo",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Encours"
+    },
+    {
+        "LocId": 5,
+        "Lng": 15.3200,
+        "Lat": -4.3700,
+        "Desc": "Éclairage public défectueux",
+        "Img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR44X9EkCzdRnowEjobrTzrgf6Z4VE0uq6GeQ&s",
+        "Av": "Avenue des Banques",
+        "Qtr": "Barumbu",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Encours"
+    },
+    {
+        "LocId": 6,
+        "Lng": 15.2800,
+        "Lat": -4.3900,
+        "Desc": "Déchets non collectés",
+        "Img": "https://infos27.cd/wp-content/uploads/2025/12/IMG-20251209-WA0013.jpg",
+        "Av": "Avenue des Poids Lourds",
+        "Qtr": "Limete",
+        "Cne": "Limete",
+        "Vll": "Kinshasa",
+        "stt": "Signalé"
+    },
+    {
+        "LocId": 7,
+        "Lng": 15.3310,
+        "Lat": -4.3900,
+        "Desc": "Camion abandonné",
+        "Img": "https://infos27.cd/wp-content/uploads/2025/12/IMG-20251209-WA0013.jpg",
+        "Av": "Avenue des Poids Lourds",
+        "Qtr": "Limete",
+        "Cne": "Limete",
+        "Vll": "Kinshasa",
+        "stt": "Résolu"
+    }
+]

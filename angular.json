@@ -35,7 +35,11 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": [
+              "src/global.scss", 
+              "src/theme/variables.scss",
+              "node_modules/maplibre-gl/dist/maplibre-gl.css"
+            ],
             "scripts": [],
             "browser": "src/main.ts"
           },
@@ -55,8 +59,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "replace": "src/environments/environment.development.ts",
+                  "with": "src/environments/environment.ts"
                 }
               ],
               "outputHashing": "all"

@@ -14,8 +14,8 @@ export const routes: Routes = [
 				loadComponent: () => import('./pages/map/map.page').then( m => m.MapPage)
 			},
 			{
-				path: 'settings',
-				loadComponent: () => import('./pages/settings/settings.page').then( m => m.SettingsPage)
+				path: 'profile',
+				loadComponent: () => import('./pages/profile/profile.page').then(m => m.ProfilePage)
 			},
 			{
 				path: 'publish',
@@ -42,6 +42,10 @@ export const routes: Routes = [
 		loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
 	},
 	{
+	  path: 'geo-details',
+	  loadComponent: () => import('./pages/geo-details/geo-details.page').then( m => m.GeoDetailsPage)
+	},
+	{
 		path: '',
 		pathMatch: 'full',
 		redirectTo: '/cityfix-kin/home'
@@ -49,5 +53,5 @@ export const routes: Routes = [
 	{
 		path: '**',
 		loadComponent: () => import('./pages/not-found/not-found.page').then(m => m.NotFoundPage)
-	}
+	},
 ];

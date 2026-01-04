@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+	<ion-toolbar
+		class="p-2">
+		<ion-title
+			class="font-mono font-semibold text-clr-accent text-xl mt-1">
+			{{name().title}}
+			<p class="text-clr-text font-mono">{{name().page}}</p>
+		</ion-title>
+		<ion-buttons
+			slot="end">
+			<ion-button>
+				<ion-icon name="notifications"></ion-icon>
+			</ion-button>
+
+			<ion-button
+				>
+				<ion-icon name="settings" size=""></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
+</ion-header>
+
+<!-- <ion-content [fullscreen]="true">
+	<ion-header collapse="condense">
+		<ion-toolbar>
+		<ion-title size="large">cityfix</ion-title>
+		</ion-toolbar>
+	</ion-header>
+</ion-content> -->
