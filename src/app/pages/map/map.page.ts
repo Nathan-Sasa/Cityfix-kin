@@ -6,6 +6,7 @@ import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
 import { GeoLocationService } from 'src/app/core/services/geoLocation.service';
 import maplibregl from 'maplibre-gl'
 import { FeatureCollection, Point } from 'geojson';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -36,7 +37,8 @@ export class MapPage implements OnInit {
 	maps! : maplibregl.Map;
 
 	constructor(
-		private geoLocationService: GeoLocationService
+		private geoLocationService: GeoLocationService,
+		private router: Router
 	) { }
 
 	ngOnInit() {
@@ -159,13 +161,22 @@ export class MapPage implements OnInit {
 									<div>
 										<span class="text-clr-accent font-mono text-xs font-semibold">Status:</span>
 										<span class="text-xs">${status}</span>
-										<i class="bi bi-eye text-clr-accent cursor-pointer" [routerLink]="['/details-map', geoLocation.LocId]"></i>
+										<i class="bi bi-eye text-clr-accent cursor-pointer absolute right-0" id="details"></i>
 									</div>
 								</div>
 							</div>
 							`
 						)
 						.addTo(this.maps);
+
+					setTimeout(()=> {
+						const btn = document.getElementById('details')
+						if(btn){
+							btn.onclick = () =>{
+								this.router.navigate(['/geo-details', id])
+							}
+						}
+					})
 				})
 
 				this.maps.on('mouseleave', 'geoPoints-layer', () => {

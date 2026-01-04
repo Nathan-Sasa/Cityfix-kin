@@ -42,7 +42,7 @@ export const routes: Routes = [
 		loadComponent: () => import('./auth/login/login.page').then( m => m.LoginPage)
 	},
 	{
-	  path: 'geo-details',
+	  path: 'geo-details/:id',
 	  loadComponent: () => import('./pages/geo-details/geo-details.page').then( m => m.GeoDetailsPage)
 	},
 	{

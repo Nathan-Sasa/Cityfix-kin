@@ -1,13 +1,20 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>geo-details</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title>{{geoLocation.Desc}}</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">geo-details</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<!-- <ion-header collapse="condense">
+		<ion-toolbar>
+			<ion-title size="large">geo-details</ion-title>
+		</ion-toolbar>
+	</ion-header> -->
+
+	<div
+		class="flex !items-center !justify-center w-full h-full">
+		<ion-img 
+			[src]="geoLocation.Img"
+			class="w-56 h-56! !rounded-lg border border-clr-accent/50 objectif-cover"></ion-img>
+	</div>
 </ion-content>
