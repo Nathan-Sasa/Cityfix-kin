@@ -11,7 +11,7 @@
 	class="bg-clr-box!">
 
 	<div
-		class="flex justify-start items-center px-2 div-profile items-end border-b border-clr-accent/10 py-2 mx-2 mb-2">
+		class="flex justify-start items-center px-2 div-profile items-end border-b border-clr-accent/10 py-2">
 		<div>
 			<ion-buttons>
 				<ion-button
@@ -23,6 +23,8 @@
 						class="w-30 h-30 rounded-full object-cover overflow-hidden border-4 border-clr-accent/60"
 					></ion-img>
 				</ion-button>
+				<!-- données api recquises -->
+				<ion-badge class="profile-badge">Citoyen</ion-badge>
 			</ion-buttons>
 		</div>
 		<div
@@ -31,15 +33,16 @@
 				class=" flex items-center gap-1">
 				<span
 					class="text-2xl lg:text-3xl font-semibold">
+					<!-- données api recquise -->
 					Sage Sage 
 				</span>
 				<ion-icon 
 					name="checkmark-circle-outline" 
-					size="large"
+					size="small"
 					class="text-clr-accent"
 				></ion-icon>
 				<ion-button
-					id="settings-modal"
+					routerLink='/cityfix-kin/profile/settings'
 					slot="end"
 					fill="clear"
 					class="absolute settings-button">
@@ -50,6 +53,7 @@
 			<div
 				class="flex items-center justify-start gap-4 py-2 pr-2 *:not-last:border-r *:border-clr-accent/30 *:not-last:pr-2 *:text-xs lg:*:text-sm *:text-center"
 				>
+				<!-- données api recquise -->
 				<span>
 					2 Signal(s)
 				</span>
@@ -62,35 +66,49 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <ion-label
-		class="text-clr-span label-title font-semibold">
-		Compte
-	</ion-label> -->
-
+	<div 
+		class="signals-span px-2 pt-4 mb-4 flex items-center justify-start sticky -top-2 z-100000 relative"
+		[ngClass]="getStatusClass(isDark)">
+		<span class="font-semibold font-mono" >Signals</span>
+	</div>
 	<div
-		class="h-40 bg-clr-box-w rounded-lg">
-		<ion-list-header
-			class="text-lg font-semoibold">
-			Compte
-		</ion-list-header>
+		class="relative lg:w-1/2">
 		<ion-list
-			[inset]="true">
+			class="list-border-none"
+			[inset]="false">
 			<ion-item
-				[button]="true">
-				<ion-icon name="person-circle" class="mr-2 text-2xl"></ion-icon>
-				À propos
-			</ion-item>
-			<ion-item
-			[button]="true">
-				<ion-icon name="lock-closed" class="mr-2 text-2xl"></ion-icon>
-				Mot de passe & Sécurité
+				*ngFor="let p of profilePost"
+				>
+				<div
+					class=" flex jusity-between gap-x-2 relative">
+					<div
+						class="w-6/10 h-44 flex flex-col justify-between relative">
+						<h5>{{p.Desc}}</h5>
+						<p class="line-clamp-3 text-clr-span">{{p.com}}</p>
+						<span class="text-clr-spa mt-2 text-clr-accent">21-12-2025</span>
+						<ion-button
+							fill="clear"
+							class="post-btn"
+							[routerLink]="['/cityfix-kin/profile/map', p.LocId]">
+							<ion-icon name="link"></ion-icon>
+						</ion-button>
+					</div>
+					<div
+						class="w-4/10 h-44 rounded-xl flex items-center justify-center relative overflow-hidden">
+						<ion-img 
+							[src]="p.Img"
+							class="h-full w-full post-img objectif-cover"
+						></ion-img>
+						<!-- <img 
+							[src]="p.Img" 
+							alt=""
+							class="w-full h-full objectif"	
+						> -->
+					</div>
+				</div>
+	
 			</ion-item>
 		</ion-list>
+
 	</div>
-
-
-	<!-- <div>
-		<app-settings></app-settings>
-	</div> -->
 </ion-content>

@@ -12,10 +12,26 @@ ion-list-header{
     font: 500 !important;
 }
 
+.profile-badge{
+    --background: var(--color-clr-accent);
+    --color: white;
+    // --padding-end: 20px !important;
+    // --padding-start: 20px;
+    position: absolute;
+    bottom: 2px;
+    right: 0;
+    padding: 3px 8px !important;
+    border-radius: 16px !important;
+}
+
 ion-list{
     border-radius: 16px !important;
     margin-top: none !important;
     border: 1px solid var(--color-clr-span);
+}
+.list-border-none{
+    border: none !important;
+    --background: transparent !important;
 }
 
 ion-item {
@@ -25,4 +41,21 @@ ion-item {
 .settings-button{
     right: 0;
     color: var(--color-clr-accent);
+}
+
+.signals-span{
+    --background: --ion-color-background;
+}
+
+.post-img{
+    --height: 100% !important;
+    --width: 100% !important;
+    --border-radius: 8px !important;
+}
+
+.post-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    --color: var(--color-clr-accent)
 }

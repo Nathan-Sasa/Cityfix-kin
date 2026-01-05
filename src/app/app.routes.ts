@@ -15,7 +15,13 @@ export const routes: Routes = [
 			},
 			{
 				path: 'profile',
-				loadComponent: () => import('./pages/profile/profile.page').then(m => m.ProfilePage)
+				loadComponent: () => import('./pages/profile/profile.page').then(m => m.ProfilePage),
+				// children: [
+				// 	{
+				// 		path: 'settings',
+				// 		loadComponent: ()=> import('./shared/components/settings/settings.page').then(m=> m.SettingsPage)
+				// 	},
+				// ]
 			},
 			{
 				path: 'publish',
@@ -51,8 +57,12 @@ export const routes: Routes = [
 
 	// profile paths ==============================================
 	{
-		path: 'settings',
+		path: 'cityfix-kin/profile/settings',
 		loadComponent: ()=> import('./shared/components/settings/settings.page').then(m=> m.SettingsPage)
+	},
+	{
+	  path: 'cityfix-kin/profile/map/:id',
+	  loadComponent: () => import('./shared/components/profile-post-map/profile-post-map.page').then( m => m.ProfilePostMapPage)
 	},
 
 

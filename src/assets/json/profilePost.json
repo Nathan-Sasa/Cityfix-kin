@@ -1,0 +1,62 @@
+[
+    {
+        "LocId": 1,
+        "Lng": 15.2663,
+        "Lat": -4.4419,
+        "Desc": "Route degradé par la pluie",
+        "Img": "https://deskeco.com/sites/default/files/styles/1024x578/public/2019-10/Kinshasa-1.jpg?itok=pduyGbCN",
+        "Av": "Bouvard du 30 juin",
+        "Qtr": "Basoko",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Résolu",
+
+        "com": "cette route degradé en rentrant à la maison. Ça pénalise vraiment la circulation",
+        "date": "21-12-2005"
+    },
+    {
+        "LocId": 3,
+        "Lng": 15.2420,
+        "Lat": -4.4030,
+        "Desc": "Feu de signalisation hors service",
+        "Img": "https://www.adiac-congo.com/sites/default/files/img_7984.jpg",
+        "Av": "Avenue Kasa-Vubu",
+        "Qtr": "Lingwala",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Signalé",
+
+        "com": "cette route degradé en rentrant à la maison. Ça pénalise vraiment la circulation",
+        "date": "21-12-2005"
+    },
+    {
+        "LocId": 4,
+        "Lng": 15.2900,
+        "Lat": -4.4500,
+        "Desc": "Trottoir endommagé",
+        "Img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgXMMvN71Q4zohe4nFzxJ6fBfzCyctLggeXQ&s",
+        "Av": "Avenue de la Justice",
+        "Qtr": "Kintambo",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Encours",
+
+        "com": "cette route degradé en rentrant à la maison. Ça pénalise vraiment la circulation",
+        "date": "21-12-2005"
+    },
+    {
+        "LocId": 4,
+        "Lng": 15.2900,
+        "Lat": -4.4500,
+        "Desc": "Trottoir endommagé",
+        "Img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgXMMvN71Q4zohe4nFzxJ6fBfzCyctLggeXQ&s",
+        "Av": "Avenue de la Justice",
+        "Qtr": "Kintambo",
+        "Cne": "Gombe",
+        "Vll": "Kinshasa",
+        "stt": "Encours",
+
+        "com": "cette route degradé en rentrant à la maison. Ça pénalise vraiment la circulation",
+        "date": "21-12-2005"
+    }
+]

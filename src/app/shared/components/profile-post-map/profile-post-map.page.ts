@@ -1,68 +1,51 @@
-import { Component, OnInit, signal, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
-import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
-import { GeoLocationService } from 'src/app/core/services/geoLocation.service';
+import { IProfilePost } from 'src/app/core/interfaces/geoLocation.interface';
+
 import maplibregl from 'maplibre-gl'
 import { FeatureCollection, Point } from 'geojson';
-import { Router } from '@angular/router';
+import { ProfilePostService } from 'src/app/core/services/profilePost.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
-
-
+import { ActivatedRoute } from '@angular/router';
 
 const map_style_light = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json'
 const map_style_dark = 'https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json'
 
 @Component({
-	selector: 'app-map',
-	templateUrl: './map.page.html',
-	styleUrls: ['./map.page.scss'],
-	standalone: true,
-	imports: [
-		IonContent, 
-		IonHeader, 
-		IonTitle, 
-		IonToolbar, 
-		CommonModule, 
-		FormsModule,
-		HeaderComponent
-	]
+  selector: 'app-profile-post-map',
+  templateUrl: './profile-post-map.page.html',
+  styleUrls: ['./profile-post-map.page.scss'],
+  standalone: true,
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
 })
-export class MapPage implements OnInit {
+export class ProfilePostMapPage implements OnInit {
 
-	map =  signal({
-		title: 'Cityfix',
-		page: 'map'
-	})
+	public profiePostMap: IProfilePost = <IProfilePost>{}
 
-	isDark = false
+	@ViewChild('profileMapContainer', {static: false})
+	profileMapContainer!: ElementRef<HTMLDivElement>
 
-	@ViewChild('mapContainer', {static: false})
-	mapContainer!: ElementRef<HTMLDivElement>
-	
-	maps! : maplibregl.Map;
+	map!: maplibregl.Map
 
 	constructor(
-		private geoLocationService: GeoLocationService,
+		private profilePostService : ProfilePostService,
 		private themeService: ThemeService,
-		private router: Router
-		// private mapService: MapService
-	) { 
-		
-	}
+		private route: ActivatedRoute
+	) { }
 
 	ngOnInit() {
 		this.themeService.isDark$.subscribe(isDark =>{
-			if(!this.maps) return
+			if(!this.map) return
 			
-			this.maps.setStyle(
+			this.map.setStyle(
 				isDark ? map_style_dark : map_style_light
 			)
 
-			this.maps.once('styledata', () =>{
-				this.loadPoints()
-			})
+			// this.map.once('styledata', () =>{
+			// 	this.loadPoints()
+			// })
 		})
 	}
 
@@ -70,56 +53,58 @@ export class MapPage implements OnInit {
 		this.initMap()
 		// this.mapService.initMap()
 	}
-	
+
+
+
 	initMap(){
-		this.maps = new maplibregl.Map({
-			container: this.mapContainer.nativeElement,
+		this.map = new maplibregl.Map({
+			container: this.profileMapContainer.nativeElement,
 			style: this.themeService.current ? map_style_dark : map_style_light,
 			center: [15.2663, -4.4419], // les coordonées de kinshasa
 			zoom: 8
 		})
 
-		this.maps.addControl(new maplibregl.NavigationControl());
+		this.map.addControl(new maplibregl.NavigationControl());
 
-		this.maps.on('load', ()=>{
+		this.map.on('load', ()=>{
 			this.loadPoints();
 		})
 
 		setTimeout(() => {
-			this.maps.resize
+			this.map.resize
 		}, 200)
 	}
 
 	loadPoints(){
-		this.geoLocationService.getPoints().subscribe(points => {
-			const geoJson: FeatureCollection<Point> = {
-				type: 'FeatureCollection',
-				features: points.map(p => ({
-					type: 'Feature',
-					properties: {
-						id: p.LocId,
-						description: p.Desc,
-						image: p.Img,
-						avenue: p.Av,
-						quartier: p.Qtr,
-						commune: p.Cne,
-						ville: p.Vll,
-						status: p.stt
-					},
-					geometry: {
-						type: 'Point',
-						coordinates: [p.Lng, p.Lat]
+		const paramId = Number(this.route.snapshot.paramMap.get('id'))
+		const id = paramId ? +paramId : 0
+
+		this.profilePostService.getProfilePostId(id).subscribe(post => {
+			const postById = post
+			
+			if(postById){
+				// FeatureCollection<Point>
+				const geoJson  = {
+					type: 'FeatureCollection',
+					features: {
+						type: 'Feature',
+						properties: {
+							id: post.LocId,
+							description: post.Desc,
+							avenue: post.Img,
+							querier: post.Qtr,
+							commune: post.Cne,
+							ville: post.Vll,
+							status: post.stt
+						},
+						geometry: {
+							type: 'Point',
+							coordinates: [post.Lng, post.Lat]
+						}
 					}
-				}))
-			}
+				}
 
-			if(!this.maps.getSource('geoPoints')){
-				this.maps.addSource('geoPoints', {
-					type: 'geojson',
-					data: geoJson
-				});
-
-				this.maps.addLayer({
+				this.map.addLayer({
 					id: 'geoPoints-layer',
 					type: 'circle',
 					source: 'geoPoints',
@@ -137,7 +122,7 @@ export class MapPage implements OnInit {
 						'circle-stroke-color': '#ffffff',
 						'circle-opacity': 0.8
 					}
-				});
+				})
 
 				const popup = new maplibregl.Popup({
 					closeButton: true,
@@ -146,8 +131,7 @@ export class MapPage implements OnInit {
 					className: 'custom-popup'
 				})
 
-				this.maps.on('click', 'geoPoints-layer', (e) => {
-					// this.maps.getCanvas().style.cursor = 'pointer'
+				this.map.on('click', 'geoPoints-layer', (e)=>{
 					const coordinates = (e.features![0].geometry as any).coordinates.slice();
 					const description = e.features![0].properties!['description'];
 					const image = e.features![0].properties!['image'];
@@ -186,28 +170,12 @@ export class MapPage implements OnInit {
 							</div>
 							`
 						)
-						.addTo(this.maps);
+						.addTo(this.map);
 
-					setTimeout(()=> {
-						const btn = document.getElementById('details')
-						if(btn){
-							btn.onclick = () =>{
-								this.router.navigate(['/geo-details', id])
-							}
-						}
-					})
-				})
-
-				this.maps.on('mouseleave', 'geoPoints-layer', () => {
-					this.maps.getCanvas().style.cursor = '';
-					// popup.remove();
 				})
 			}
-			// mise à jour suivante des points
-			else{
-				(this.maps.getSource('geoPoints') as maplibregl.GeoJSONSource)
-					.setData(geoJson);
-			}
+
+
 		})
 	}
 

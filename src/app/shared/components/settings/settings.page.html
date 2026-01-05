@@ -1,20 +1,101 @@
-<!-- <ion-header [translucent]="true">
+<ion-header [translucent]="true">
   <ion-toolbar>
+	<ion-buttons
+		slot="start">
+		<ion-button
+			(click)="back()">
+			<ion-icon name="arrow-back" class="back-btn"></ion-icon>
+		</ion-button>
+	</ion-buttons>
     <ion-title>settings</ion-title>
   </ion-toolbar>
-</ion-header> -->
+</ion-header>
 
-<!-- <ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true">
+	<div
+		class="h-40 bg-clr-box-w rounded-lg">
+		<ion-list-header
+			class="text-lg font-semibold text-clr-span">
+			Compte
+		</ion-list-header>
+		<ion-list
+			[inset]="true">
+			<ion-item
+				[button]="true">
+				<ion-icon name="person-circle" slot="start" class="mr-2 text-2xl"></ion-icon>
+				<ion-label>Details profile</ion-label>
+				<ion-icon name="chevron-forward"></ion-icon>
+			</ion-item>
+			<ion-item
+				[button]="true">
+				<ion-icon name="lock-closed" slot="start" class="mr-2 text-2xl"></ion-icon>
+				<ion-label>Mot de passe & Sécurité</ion-label>
+				<ion-icon name="chevron-forward"></ion-icon>
+			</ion-item>
+			
+		</ion-list>
+		
+		<ion-list-header
+			class="text-lg font-semibold text-clr-span">
+			Préférence
+		</ion-list-header>
+		<ion-list
+			[inset]="true">
+			<ion-item
+				[button]="false">
+				<ion-icon name="moon" slot="start" class="mr-2 text-2xl"></ion-icon>
+				<ion-label>Thème sombre</ion-label>
+				<ion-button
+					fill="clear">
+					<ion-toggle 
+						[(ngModel)]="paletteToggle" 
+						[checked]="paletteToggle"
+						
+						(ionChange)="toggleChange($event) ; themeService.setDark($event.detail.checked)" justify="space-between"
+					></ion-toggle>
+					<!-- [checked]="isDark" -->
+				</ion-button>
+			</ion-item>
+		</ion-list>
 
-</ion-content> -->
+		<ion-list-header
+			class="text-lg font-semibold text-clr-span">
+			Politique
+		</ion-list-header>
+		<ion-list
+			[inset]="true">
+			<ion-item
+				[button]="true">
+				<ion-icon name="lock-closed" slot="start" class="mr-2 text-2xl"></ion-icon>
+				<ion-label>Politique & Confidentialité</ion-label>
+				<ion-icon name="chevron-forward"></ion-icon>
+			</ion-item>
 
-<div>
-	<ion-button
-		fill="clear">
-		<ion-toggle 
-			[(ngModel)]="paletteToggle" 
-			[checked]="isDark"
-			(ionChange)="toggleChange($event) ; themeService.setDark($event.detail.checked)" justify="space-between"
-		>Dark Mode</ion-toggle>
-	</ion-button>
-</div>
+			<ion-item
+				[button]="true">
+				<ion-icon name="lock-closed" slot="start" class="mr-2 text-2xl"></ion-icon>
+				<ion-label>Signaler un problème</ion-label>
+				<ion-icon name="chevron-forward"></ion-icon>
+			</ion-item>
+		</ion-list>
+
+		<!-- <ion-list-header
+			class="text-lg font-semibold text-clr-span">
+			Feedback
+		</ion-list-header>
+		<ion-item>
+			<ion-textarea label="Message" labelPlacement="floating" fill="outline" placeholder="Enter text"></ion-textarea>
+		</ion-item> -->
+
+		<ion-list-header
+			class="text-lg font-semibold text-clr-span">
+			Session
+		</ion-list-header>
+		<ion-item
+			[button]="false"
+			class="logout-btn">
+			<ion-icon name="log-out" slot="start" class="mr-2 text-2xl" color="light"></ion-icon>
+			<ion-label class="text-2xl logout-label" color="light">Déconnexion</ion-label>
+		</ion-item>
+	</div>
+</ion-content>

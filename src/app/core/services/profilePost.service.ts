@@ -2,29 +2,30 @@ import { Injectable } from "@angular/core"
 import { HttpClient, HttpErrorResponse } from "@angular/common/http"
 import { Observable, throwError } from "rxjs";
 import { catchError, map, tap} from "rxjs/operators";
-import { IGeoLocation } from "../interfaces/geoLocation.interface";
+import { IProfilePost } from "../interfaces/geoLocation.interface";
 import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 
-export class GeoLocationService {
+export class ProfilePostService {
 
-    private readonly GEOLOCATION_API_URL = environment.geoLocationApi
+    private readonly PROFILE_POST_API_URL = environment.profilePostApi
 
     constructor(
         private http: HttpClient
     ){}
 
-    // getPoints(){
-    //     return this.http.get<IGeoLocation[]>(this.GEOLOCATION_API_URL)
-    // }
-    getPoints(){
-        return this.http.get<IGeoLocation[]>(this.GEOLOCATION_API_URL).pipe(
-            tap(data => console.log('Les points géolocalisés reçus')),
+    getSelfPost(){
+        return this.http.get<IProfilePost[]>(this.PROFILE_POST_API_URL).pipe(
+            tap(data => console.log('Profile post ok')),
             catchError(this.handleError)
         )
+    }
+
+    getProfilePostId(id: Number): Observable<IProfilePost>{
+        return this.http.get<IProfilePost>(`${this.PROFILE_POST_API_URL}/${id}`)
     }
 
     private handleError(error: HttpErrorResponse){
