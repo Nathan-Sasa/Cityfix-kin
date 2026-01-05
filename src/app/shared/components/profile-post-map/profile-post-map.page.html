@@ -1,14 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+	<ion-button
+		(click)="back()"
+		slot="start"
+		fill="clear">
+		<ion-icon name="arrow-back"></ion-icon>
+	</ion-button>
     <ion-title>profile-post-map</ion-title>
+	<span>Cordonnées: {{[mapData.Lng, mapData.Lat]}}</span>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-	<!-- <ion-header collapse="condense">
-		<ion-toolbar>
-		<ion-title size="large">profile-post-map</ion-title>
-		</ion-toolbar>
-	</ion-header> -->
-	<div #profileMapContainer></div>
+	<div class="map-wrapper">
+		<div 
+			#profileMapContainer
+			class="profile-map-container"></div>
+	</div>
 </ion-content>

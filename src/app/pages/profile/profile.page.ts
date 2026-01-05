@@ -16,10 +16,7 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 	styleUrls: ['./profile.page.scss'],
 	standalone: true,
 	imports: [IonBadge, 
-		IonContent, 
-		IonHeader, 
-		IonTitle, 
-		IonToolbar,
+		IonContent,
 		IonButtons,
 		IonButton,
 		IonImg,
@@ -29,10 +26,6 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 		IonItem,
 		IonListHeader,
 		IonModal,
-		IonTabButton,
-		IonTabs,
-		IonTab,
-		IonTabBar,
 		IonBadge,
 		CommonModule, 
 		FormsModule,
@@ -86,7 +79,7 @@ export class ProfilePage implements OnInit {
 	getProfilePost(){
 		this.profileProstService.getSelfPost().subscribe(res => {
 			this.profilePost = res
-			console.log(this.profilePost)
+			// console.log(this.profilePost)
 		})
 	}
 
