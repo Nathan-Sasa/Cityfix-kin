@@ -1,10 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonListHeader, IonModal, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, IonBadge } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonListHeader, IonModal, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, IonBadge, ModalController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
-import { lockClosed, person, personCircle, settings, checkmarkCircleOutline, link } from 'ionicons/icons';
+import { lockClosed, person, personCircle, settings, checkmarkCircleOutline, link, eye, close, imageOutline, imagesOutline, imageSharp, information, informationCircleOutline } from 'ionicons/icons';
+
 import { RouterModule } from '@angular/router';
 import { ProfilePostService } from 'src/app/core/services/profilePost.service';
 import { IProfilePost } from 'src/app/core/interfaces/geoLocation.interface';
@@ -26,7 +27,10 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 		IonItem,
 		IonListHeader,
 		IonModal,
+		IonToolbar,
 		IonBadge,
+		IonTitle,
+		IonContent,
 		CommonModule, 
 		FormsModule,
 		HeaderComponent,
@@ -59,9 +63,10 @@ export class ProfilePage implements OnInit {
 
 	constructor(
 		private profileProstService: ProfilePostService,
-		private themeService : ThemeService
+		private themeService : ThemeService,
+		private modal: ModalController
 	) {
-		addIcons({checkmarkCircleOutline,settings,person,personCircle,lockClosed, link});
+		addIcons({checkmarkCircleOutline,settings,link,eye,close,imageOutline,imageSharp,person, personCircle,informationCircleOutline});
 	}
 
 	ngOnInit() {
@@ -93,5 +98,11 @@ export class ProfilePage implements OnInit {
 			default:
 				return 'bg-gray-500 text-white';
 		}
+	}
+
+	//  modal ===========
+	closeModal(){
+		this.modal.dismiss();
+		
 	}
 }

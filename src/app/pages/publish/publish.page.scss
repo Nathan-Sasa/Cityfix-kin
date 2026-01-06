@@ -1,1 +1,21 @@
- 
+.camera-btn{
+    height: 200px;
+    width: 70%;
+    --border-radius: 24px !important;
+    --background: var(--color-clr-accent);
+}
+
+ion-input,
+ion-textarea{
+    --highlight-color-focused: var(--color-clr-accent) !important;
+    // color: var(--color-clr-accent) !important;
+}
+
+// .title-input{
+    
+// }
+
+.descript-area:focus{
+    --border-color: var(--color-clr-accent) !important;
+    --highlight-color-focused: var(--color-clr-accent) !important;
+}

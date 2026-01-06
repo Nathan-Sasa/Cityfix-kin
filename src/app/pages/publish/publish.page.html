@@ -7,9 +7,42 @@
 <app-header [name]="publish"></app-header>
 
 <ion-content [fullscreen]="true">
-	<ion-header collapse="condense">
-		<ion-toolbar>
-			<ion-title size="large">publish</ion-title>
-		</ion-toolbar>
-	</ion-header>
+	<div class=" flex justify-center py-8">
+		<ion-button
+			slot="true"
+			class="camera-btn">
+			<ion-icon name="camera" class="text-6xl"></ion-icon>
+		</ion-button>
+	</div>
+	<ion-list>
+		<ion-item>
+			<ion-input 
+				label="Sujet"
+				placeholder="Enter text"
+				maxlength="40"
+				[counter]="true" 
+				[(ngModel)]="title"
+				class="title-input"
+			></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-textarea 
+				label="Description" 
+				labelPlacement="floating" 
+				[counter]="true" 
+				[autoGrow]="true"
+				maxlength="150"
+				[(ngModel)]="description"
+				clear-input="true"
+				class="descript-area"
+			></ion-textarea>
+		</ion-item>
+		<!-- <div>
+			<span>{{title()}}</span>
+			<p>{{description()}}</p>
+		</div> -->
+		<!-- <ion-item>
+
+		</ion-item> -->
+	</ion-list>
 </ion-content>

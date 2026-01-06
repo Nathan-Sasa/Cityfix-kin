@@ -59,3 +59,33 @@ ion-item {
     right: 0;
     --color: var(--color-clr-accent)
 }
+
+// ***************** modals styles ****************************
+// profile modale ********************************
+.profile-modal{
+    --height: 210px;
+    --border-radius: 16px 16px 0 0;
+}
+.profile-modal ion-list{
+    border: none !important;
+    border-radius: 0 !important;
+    --padding: 0 !important;
+}
+.custom-icon{
+    margin-right: 8px;
+}
+
+.profile-image-modal-toolbar{
+    display: flex;
+    justify-content: center;
+
+    --display: flex;
+}
+.modal-title-center{
+    --margin-inline: auto;
+}
+.modal-photo-profile{
+
+    min-height: 200px;
+    height: 400px;
+}
