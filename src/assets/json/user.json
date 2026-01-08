@@ -1,0 +1,17 @@
+{
+    "profile": "assets/images/test/test.webp",
+    "name": "NameTest",
+    "firstName": "firstnameTest",
+    "email": "test@gmail.com",
+    "password": "test@1234",
+    "stat": "citoyen",
+    "dateOfBorn": "03-06-2002",
+    "profession": "professionTest",
+    "address": {
+        "no": "01",
+        "street": "avenueTest",
+        "quartier": "quartierTest",
+        "commune": "communeTest",
+        "ville": "villeTest"
+    }
+}

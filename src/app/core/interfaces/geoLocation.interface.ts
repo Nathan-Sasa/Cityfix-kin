@@ -26,3 +26,19 @@ export interface IProfilePost{
     com: string;
     date: Date;
 }
+
+export interface IUser{
+    profile: string;
+    name: string;
+    firstName: string;
+    email: string;
+    password: string
+    stat: string;
+    dateOfBorn: Date;
+    profession: string;
+    address: string;
+    no: number;
+    street: string;
+    quartier: string;
+    ville: string;
+}

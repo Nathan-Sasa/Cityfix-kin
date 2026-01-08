@@ -8,14 +8,21 @@ ion-header {
 }
 
 ion-list-header{
-   margin-left: 16px !important;
+   padding-left: 16px !important;
     font: 500 !important;
+}
+.modal-header{
+    font-weight: 600 !important;
+    font-size: large;
+    display: flex;
+    // border: 1px solid;
+    padding-inline: auto;
 }
 
 ion-list{
     border-radius: 16px !important;
     margin-top: none !important;
-    border: 1px solid var(--color-clr-span);
+    // border: 1px solid var(--color-clr-span);
 }
 
 ion-item {

@@ -21,7 +21,8 @@
 		<ion-list
 			[inset]="true">
 			<ion-item
-				[button]="true">
+				[button]="true"
+				id="details-modal">
 				<ion-icon name="person-circle" slot="start" class="mr-2 text-2xl"></ion-icon>
 				<ion-label>Details profile</ion-label>
 				<ion-icon name="chevron-forward"></ion-icon>
@@ -98,4 +99,27 @@
 			<ion-label class="text-2xl logout-label" color="light">Déconnexion</ion-label>
 		</ion-item>
 	</div>
+
+	<!-- settings modals  -->
+	 <ion-modal
+	 	trigger="details-modal"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-list>
+				<ion-header>
+					<ion-toolbar>
+						Details profile
+					</ion-toolbar>
+				</ion-header>
+				<ion-list-header
+					class="modal-header">
+					Details profile
+				</ion-list-header>
+				<ion-item>
+
+				</ion-item>
+			</ion-list>
+		</ng-template>
+	 </ion-modal>
 </ion-content>
