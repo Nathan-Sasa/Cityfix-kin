@@ -6,7 +6,8 @@
 			slot="true"
 			class="camera-btn"
 			id="pub-modal"
-			(click)="photo()">
+			(click)="photo()"
+			>
 			<ion-icon name="camera" class="text-6xl"></ion-icon>
 		</ion-button>
 	</div>
@@ -49,22 +50,67 @@
 			<ng-template>
 				<ion-toolbar>
 					<ion-button
-						(click)="closeModal()">
-						<ion-icon name="arrow-back"></ion-icon>
+						(click)="closeModal()"
+						fill="clear"
+						slot="start"
+						class="cancel-btn">
+						<ion-text>Annuler</ion-text>
+						<!-- <ion-icon name="arrow-back" size="large" class="back-btn"></ion-icon> -->
+					</ion-button>
+					<ion-button
+						fill="clear"
+						slot="end"
+						(click)="submit()"
+						[disabled]="form.invalid"
+						class="submit-btn">
+						<ion-text>Signaler</ion-text>
 					</ion-button>
 				</ion-toolbar>
 
 				<ion-content>
-					<div>
-						<ion-img id="imgPublish"></ion-img>
-					</div>
+					<form 
+						[formGroup]="form"
+						action=""
+						>
+						<div
+							class="max-sm:w-full h-80 ">
+							<ion-img id="imgPublish"></ion-img>
+						</div>
+
+						<ion-list>
+							<ion-item>
+								<ion-input 
+									label="Sujet"
+									placeholder="Enter text"
+									maxlength="40"
+									[counter]="true" 
+									formControlName="formTitle"
+									[value]="title()"
+									class="title-input"
+								></ion-input>
+							</ion-item>
+							<ion-item>
+								<ion-textarea 
+									label="Description" 
+									labelPlacement="floating" 
+									[counter]="true" 
+									[autoGrow]="true"
+									maxlength="150"
+									formControlName="formDescription"
+									[value]="description()"
+									clear-input="true"
+									class="descript-area"
+								></ion-textarea>
+							</ion-item>
+						</ion-list>
+						<!-- <ion-button
+							type="submit"
+							class="submit-btn">
+							Signaler
+						</ion-button> -->
+					</form>
 				</ion-content>
 			</ng-template>
-			<!-- <ion-list>
-				<ion-item>
-
-				</ion-item>
-			</ion-list> -->
 		</ion-modal>
 	</ion-list>
 </ion-content>
