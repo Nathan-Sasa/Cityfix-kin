@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonButton, IonIcon, IonList, IonItem, IonInput, IonTextarea, IonModal, ModalController, IonImg, IonToolbar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
-import { camera, cameraReverse } from 'ionicons/icons';
+import { arrowBack, camera, cameraReverse } from 'ionicons/icons';
 
 // plugins capacitor
 import { Camera, CameraResultType } from '@capacitor/camera'
@@ -19,7 +19,12 @@ const takePicture = async () => {
 	var imageUrl = image.webPath;
 	console.log('url image : ' ,imageUrl)
 
-  	// imageElement.src = imageUrl;
+	const imageElement = document.getElementById('imgPublish') as HTMLImageElement
+	
+	if(imageElement && imageUrl){
+		imageElement.src = imageUrl
+	}
+
 }
 
 @Component({
@@ -58,7 +63,7 @@ export class PublishPage implements OnInit {
 	constructor(
 		private modalCtrl: ModalController
 	) { 
-		addIcons({camera,cameraReverse});
+		addIcons({camera,cameraReverse, arrowBack});
 	}
 
 	ngOnInit() {
