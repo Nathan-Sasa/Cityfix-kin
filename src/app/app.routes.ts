@@ -38,7 +38,7 @@ export const routes: Routes = [
 	// auth paths ==============================================
 	{
 		path: 'loanding',
-		loadComponent: () => import('./pages/loanding/loanding.page').then( m => m.LoandingPage)
+		loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage)
 	},
 	{
 		path: 'register',

@@ -20,10 +20,7 @@ const map_style_dark = 'https://tiles.stadiamaps.com/styles/alidade_smooth_dark.
 	styleUrls: ['./map.page.scss'],
 	standalone: true,
 	imports: [
-		IonContent, 
-		IonHeader, 
-		IonTitle, 
-		IonToolbar, 
+		IonContent,
 		CommonModule, 
 		FormsModule,
 		HeaderComponent
@@ -47,10 +44,7 @@ export class MapPage implements OnInit {
 		private geoLocationService: GeoLocationService,
 		private themeService: ThemeService,
 		private router: Router
-		// private mapService: MapService
-	) { 
-		
-	}
+	) { }
 
 	ngOnInit() {
 		this.themeService.isDark$.subscribe(isDark =>{

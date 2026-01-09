@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonListHeader, IonModal, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, IonBadge, ModalController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
 import { lockClosed, person, personCircle, settings, checkmarkCircleOutline, link, eye, close, imageOutline, imagesOutline, imageSharp, information, informationCircleOutline } from 'ionicons/icons';
 
 import { RouterModule } from '@angular/router';
@@ -25,7 +24,6 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 		IonLabel,
 		IonList,
 		IonItem,
-		IonListHeader,
 		IonModal,
 		IonToolbar,
 		IonBadge,
@@ -33,7 +31,6 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 		IonContent,
 		CommonModule, 
 		FormsModule,
-		HeaderComponent,
 		RouterModule 
 	]
 })
@@ -51,7 +48,6 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 
 export class ProfilePage implements OnInit {
 
-	// profilePost: IProfilePost = <IProfilePost>{};
 	profilePost: IProfilePost[] = []
 	theme = localStorage.getItem('theme')
 	isDark =false
@@ -78,13 +74,11 @@ export class ProfilePage implements OnInit {
 			)
 			console.log(isDark)
 		})
-
 	}
 
 	getProfilePost(){
 		this.profileProstService.getSelfPost().subscribe(res => {
 			this.profilePost = res
-			// console.log(this.profilePost)
 		})
 	}
 
@@ -100,9 +94,8 @@ export class ProfilePage implements OnInit {
 		}
 	}
 
-	//  modal ===========
+	//  modalCtrl ===========
 	closeModal(){
 		this.modal.dismiss();
-		
 	}
 }

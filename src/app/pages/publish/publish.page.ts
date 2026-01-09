@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonIcon, IonList, IonItem, IonInput, IonTextarea } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon, IonList, IonItem, IonInput, IonTextarea } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
 import { camera, cameraReverse } from 'ionicons/icons';
@@ -12,10 +12,7 @@ import { camera, cameraReverse } from 'ionicons/icons';
 	styleUrls: ['./publish.page.scss'],
 	standalone: true,
 	imports: [
-		IonContent, 
-		IonHeader, 
-		IonTitle, 
-		IonToolbar, 
+		IonContent,
 		IonButton,
 		IonIcon,
 		IonList,

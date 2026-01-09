@@ -10,8 +10,6 @@ ion-content{
 }
 
 .map-container{
-    // width: 100%;
-    // height: 100%;
     position: absolute;
     inset: 0;
 }
@@ -30,13 +28,3 @@ ion-content{
     box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
     border: 2px solid red;
 }
-
-// .maplibregl-ctrl-top-left,
-// .maplibregl-ctrl-top-right{
-// 	top: calc(56px + env(safe-area-inset-top));
-// }
-
-// .maplibregl-ctrl-group {
-//     border-radius: 4px;
-//     background: #5242c9;
-// }

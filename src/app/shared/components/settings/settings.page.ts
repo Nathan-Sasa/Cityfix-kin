@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonButton, IonButtons, IonContent, IonHeader, IonList, IonTitle, IonToggle, IonToolbar, IonItem, IonBackButton, IonModal, IonIcon, IonListHeader, NavController, IonLabel, IonTextarea } from '@ionic/angular/standalone';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { addIcons } from 'ionicons';
-import { arrowBack, arrowBackSharp, arrowForward, arrowForwardOutline, chevronForward, lockClosed, logOut, moon, moonOutline, personCircle } from 'ionicons/icons';
+import { arrowBack, arrowBackSharp, chevronForward, lockClosed, logOut, moon, moonOutline, personCircle } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
 
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
