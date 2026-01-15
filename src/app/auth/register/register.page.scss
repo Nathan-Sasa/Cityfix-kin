@@ -1,0 +1,21 @@
+ion-header {
+    box-shadow: none;
+    // border-bottom: 1px solid rgba(83, 66, 195, 0.26);
+    border: none;
+}
+
+.back-btn{
+    --color: var(--color-clr-accent ) !important;
+}
+
+.register-btn{
+    --background: var(--color-clr-accent) !important;
+    width: 100% !important;
+    --border-radius: 12px !important;
+    padding-block: 8px !important;
+    --border: 1px solid white !important;
+}
+.register-title{
+    width: fit-content !important;
+    margin-inline: auto !important;
+}

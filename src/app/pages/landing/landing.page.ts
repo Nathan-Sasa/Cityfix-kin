@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonTitle, IonToolbar, IonText, NavController } from '@ionic/angular/standalone';
 
 @Component({
 	selector: 'app-loanding',
@@ -13,15 +13,30 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 		IonHeader, 
 		IonTitle, 
 		IonToolbar,
+		IonButtons,
+		IonButton,
+		IonText,
 		CommonModule,
 		FormsModule
 	]
 })
 export class LandingPage implements OnInit {
 
-	constructor() { }
+	appContent = signal({
+		title: 'Cityfix',
+		logo: '',
+
+	})
+
+	constructor(
+		private navCtrl: NavController
+	) { }
 
 	ngOnInit() {
 	}
 
+	login(){
+		this.navCtrl.navigateForward('/login')
+	}
+	
 }

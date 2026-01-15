@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ProfilePostService } from 'src/app/core/services/profilePost.service';
 import { IProfilePost } from 'src/app/core/interfaces/geoLocation.interface';
 import { ThemeService } from 'src/app/core/services/theme.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
 	selector: 'app-profile',
@@ -60,7 +61,8 @@ export class ProfilePage implements OnInit {
 	constructor(
 		private profileProstService: ProfilePostService,
 		private themeService : ThemeService,
-		private modal: ModalController
+		private modal: ModalController,
+		private authS: AuthService
 	) {
 		addIcons({checkmarkCircleOutline,settings,link,eye,close,imageOutline,imageSharp,person, personCircle,informationCircleOutline});
 	}

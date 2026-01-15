@@ -1,0 +1,12 @@
+ion-header {
+    box-shadow: none;
+    border-bottom: 1px solid rgba(83, 66, 195, 0.26);
+}
+ion-toolbar{
+    --padding-start: 16px !important;
+    --padding-end: 16px !important;
+}
+
+.login-btn{
+    --background: var(--color-clr-accent) !important;
+}

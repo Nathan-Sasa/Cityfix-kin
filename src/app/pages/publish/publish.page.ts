@@ -9,6 +9,7 @@ import { arrowBack, camera, cameraReverse } from 'ionicons/icons';
 // plugins capacitor
 import { Camera, CameraResultType } from '@capacitor/camera'
 import { Geolocation } from '@capacitor/geolocation'
+// import { PositionOptions } from 'maplibre-gl';
 
 const takePictureLocation = async () => {
 
@@ -30,8 +31,12 @@ const takePictureLocation = async () => {
 
 	// geoLocalisation
 	const position = await Geolocation.getCurrentPosition()
+	// const Lat = position.coords.latitude
+	// const Lng = position.coords.longitude
+	// const time = position.timestamp
 	// getCurrentPosition(options?: PositionOptions | undefined) => Promise<Position>
-	console.log('lat :', position.coords.latitude, 'lng :', position.coords.longitude)
+	// console.log('lat :', position.coords.latitude, 'lng :', position.coords.longitude)
+	// console.log('lat :' + Lat, 'lng :' + Lng, 'time :' + time)
 }
 
 @Component({

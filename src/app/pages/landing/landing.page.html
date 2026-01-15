@@ -1,13 +1,22 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>loanding</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-title
+			class="text-clr-accent font-semibold font-mono">
+			{{appContent().title}}
+		</ion-title>
+		<ion-button
+			slot="end"
+			class="login-btn"
+			(click)="login()">
+			<ion-text>Se connecter</ion-text>
+		</ion-button>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">loanding</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+    	<ion-toolbar>
+    		<ion-title size="large">loanding</ion-title>
+      	</ion-toolbar>
+    </ion-header>
 </ion-content>

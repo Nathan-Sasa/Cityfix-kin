@@ -1,13 +1,83 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
+	<ion-toolbar>
+		<ion-button
+			(click)="back()"
+			slot="start"
+			fill="clear"
+			class="back-btn"
+			>
+			<ion-icon name="chevron-back"></ion-icon>
+		</ion-button>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+	<div
+		class="max-w-md mx-auto">
+		<div
+			class="mt-16">
+			<ion-title
+				class="text-clr-accent font-semibold font-mono register-title">
+				S'enregistrer
+			</ion-title>
+		</div>
+
+		<form 
+			[formGroup]="form"
+			(submit)="submit()"
+			action=""
+			class="mx-8! mt-16! flex! flex-col gap-8">
+			<div
+			class="border-2 border-clr-accent px-4 rounded-2xl">
+				<ion-input 
+					formControlName="username"
+					placeholder="Enter le nom d'utilisateur"
+					class="title-input"
+				></ion-input>
+			</div>
+			<div
+			class="border-2 border-clr-accent px-4 rounded-2xl">
+				<ion-input 
+					formControlName="email"
+					placeholder="Enter votre mail"
+					class="title-input"
+				></ion-input>
+			</div>
+
+			<div
+			class="border-2 border-clr-accent px-4 rounded-2xl">
+				<ion-input 
+					formControlName="password"
+					placeholder="Enter le mot de pass"
+					class="title-input"
+					type="password"
+				></ion-input>
+			</div>
+			<div
+			class="border-2 border-clr-accent px-4 rounded-2xl">
+				<ion-input 
+					formControlName="confirm"
+					placeholder="Confirmez le mot de pass"
+					class="title-input"
+					type="password"
+				></ion-input>
+			</div>
+			<div>
+				<ion-button
+					slot="center"
+					type="submit"
+					class="register-btn">
+					Enregistrer
+				</ion-button>
+			</div>
+		</form>
+
+		<div
+			class="mt-8 flex justify-center">
+			<ion-text>Avez-vous déjà un compte ? </ion-text>
+			<ion-text 
+				(click)="login()"
+				class="ml-1 text-clr-accent font-semibold"> Se connecter</ion-text>
+		</div>
+	</div>
 </ion-content>

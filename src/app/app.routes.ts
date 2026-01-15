@@ -1,13 +1,16 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+
 	{
 		path: 'cityfix-kin',
 		loadComponent: () => import('./pages/cityfix/cityfix.page').then( m => m.CityfixPage),
 		children: [
 			{
 				path: 'home',
-				loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+				loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage),
+				canActivate: [authGuard]
 			},
 			{
 				path: 'map',
@@ -37,7 +40,7 @@ export const routes: Routes = [
 
 	// auth paths ==============================================
 	{
-		path: 'loanding',
+		path: 'landing',
 		loadComponent: () => import('./pages/landing/landing.page').then( m => m.LandingPage)
 	},
 	{
