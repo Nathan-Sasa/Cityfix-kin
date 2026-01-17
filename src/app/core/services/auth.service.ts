@@ -70,7 +70,7 @@ export class AuthService {
         this._isLoggedIn$.next(false)
         this._role$.next(null)
 
-        this.router.parseUrl('/login')
+        this.router.navigateByUrl('/login')
     }
 
     getToken(): string | null {
@@ -139,10 +139,19 @@ export class AuthService {
         return (payload && payload.sub) ? payload.sub : (payload && payload.username ? payload.username : null)
     }
 
+    getEmailFromToken(token?:string): string | null {
+        const payload = this.decodeJwtPayload(token)
+
+        return (payload && payload.aud) ? payload.aud : ( payload && payload.aud ? payload.email.aud : null )
+    }
+
     isTokenExpired(token?: string): boolean {
         const payload = this.decodeJwtPayload(token)
 
-        if(!payload || !payload.exp) return true
+        if(!payload || !payload.exp){
+            this.logout()
+            return true
+        }
         
         const nowSec = Math.floor(Date.now() / 1000)
         return payload.exp < nowSec

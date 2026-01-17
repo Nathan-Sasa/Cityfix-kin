@@ -10,6 +10,8 @@ import { ProfilePostService } from 'src/app/core/services/profilePost.service';
 import { IProfilePost } from 'src/app/core/interfaces/geoLocation.interface';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { IProfile } from 'src/app/core/interfaces/interfaces.interface';
+import { ProfileService } from 'src/app/core/services/profile.service';
 
 @Component({
 	selector: 'app-profile',
@@ -50,24 +52,28 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class ProfilePage implements OnInit {
 
 	profilePost: IProfilePost[] = []
+	profile: IProfile = <IProfile>{}
 	theme = localStorage.getItem('theme')
 	isDark =false
 
-	profile = signal({
-		title: 'Cityfix',
-		page: 'profile'
-	})
+	// profile = signal({
+	// 	name: this.authS.getUsernameFromToken(),
+	// 	email: this.authS.getEmailFromToken()
+	// })
 
 	constructor(
 		private profileProstService: ProfilePostService,
 		private themeService : ThemeService,
 		private modal: ModalController,
-		private authS: AuthService
+		private authS: AuthService,
+		private profileS: ProfileService
 	) {
 		addIcons({checkmarkCircleOutline,settings,link,eye,close,imageOutline,imageSharp,person, personCircle,informationCircleOutline});
 	}
 
 	ngOnInit() {
+		this.Profile()
+
 		this.getProfilePost()
 
 		this.themeService.isDark$.subscribe(isDark =>{
@@ -75,6 +81,23 @@ export class ProfilePage implements OnInit {
 				isDark ? true : false
 			)
 			console.log(isDark)
+		})
+	}
+
+	// getProfile(){
+	// 	this.profileS.getProfile().subscribe(res => {
+	// 			this.profile = res
+	// 		}
+	// 	)
+	// }
+	Profile(){
+		this.profileS.getProfile().subscribe({
+			next: (res) =>{
+				this.profile = res
+			},
+			error(err) {
+				console.log("données non recus : ", err)
+			},
 		})
 	}
 

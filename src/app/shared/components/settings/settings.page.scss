@@ -11,13 +11,13 @@ ion-list-header{
    padding-left: 16px !important;
     font: 500 !important;
 }
-.modal-header{
-    font-weight: 600 !important;
-    font-size: large;
-    display: flex;
-    // border: 1px solid;
-    padding-inline: auto;
-}
+// .modal-header{
+//     font-weight: 600 !important;
+//     font-size: large;
+//     display: flex;
+//     // border: 1px solid;
+//     padding-inline: auto;
+// }
 
 ion-list{
     border-radius: 16px !important;
@@ -44,3 +44,9 @@ ion-textarea{
 //     --color: var(--color-clr-text-white) !important;
 //     color: var(--color-clr-white) !important;
 // }
+
+.custom-modal{
+    position: relative;
+    --height: 210px;
+    --border-radius: 16px 16px 0 0;
+}

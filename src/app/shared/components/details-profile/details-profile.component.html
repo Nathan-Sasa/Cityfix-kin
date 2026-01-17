@@ -1,0 +1,604 @@
+<ion-header
+	[translucent]="true">
+	<ion-toolbar>
+		<ion-title>Details Profile</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content
+	[fullscreen]="true">
+
+	<div
+		class="pb-16!">
+		<ion-list>
+			<ion-list-header>
+				Informations générales
+			</ion-list-header>
+			<ion-item>
+				<ion-icon 
+					name="person"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Nom</ion-text>
+					<ion-text class="data">{{bio.nom}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-nom"></ion-icon>
+			</ion-item>
+		
+			<ion-item>
+				<ion-icon 
+					name="person"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Prénom</ion-text>
+					<ion-text class="data">{{bio.prenom}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-prenom"></ion-icon>
+			</ion-item>
+			
+			<ion-item>
+				<ion-icon 
+					name="person"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Genre</ion-text>
+					<ion-text class="data">{{bio.genre}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-genre"></ion-icon>
+			</ion-item>
+		
+		</ion-list>
+		
+		<ion-list>
+			<ion-list-header>
+				Description
+			</ion-list-header>
+			<ion-item>
+				<ion-icon 
+					name="person"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Note</ion-text>
+					<ion-text class="data line-clamp-1">{{bio.description}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-description"></ion-icon>
+			</ion-item>
+		</ion-list>
+		
+		<ion-list>
+			<ion-list-header>
+				Profession
+			</ion-list-header>
+			<ion-item>
+				<ion-icon 
+					name="bag"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Site</ion-text>
+					<ion-text class="data">{{bio.travail}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-travail"></ion-icon>
+			</ion-item>
+		</ion-list>
+		
+		<ion-list>
+			<ion-list-header>
+				Coordonnées
+			</ion-list-header>
+			<ion-item>
+				<ion-icon 
+					name="mail"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">E-mail</ion-text>
+					<ion-text class="data">{{bio.email}}</ion-text>
+				</div>
+			</ion-item>
+			
+			<ion-item>
+				<ion-icon 
+					name="call"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Téléphone</ion-text>
+					<ion-text class="data" *ngIf="bio.telephone !== 0">{{bio.telephone}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-telephone"></ion-icon>
+			</ion-item>
+		</ion-list>
+		
+		<ion-list>
+			<ion-list-header>
+				État civil
+			</ion-list-header>
+			<ion-item>
+				<ion-icon 
+					name="heart-circle"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Situation amoureuse</ion-text>
+					<ion-text class="data">{{bio.etatCivil}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-ecivil"></ion-icon>
+			</ion-item>
+		</ion-list>
+
+		<ion-list>
+			<ion-list-header>
+				Localisation
+			</ion-list-header>
+			<ion-item>
+				<ion-icon 
+					name="location"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Ville</ion-text>
+					<ion-text class="data">{{bio.ville}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-ville"></ion-icon>
+			</ion-item>
+			<ion-item>
+				<ion-icon 
+					name="location"
+					class="icon-style"
+					size="small"
+					>
+				</ion-icon>
+				<div
+					class="flex flex-col ml-4">
+					<ion-text class="span">Commune</ion-text>
+					<ion-text class="data">{{bio.commune}}</ion-text>
+				</div>
+				<ion-icon name="pencil" slot="end" id="modal-commune"></ion-icon>
+			</ion-item>
+		</ion-list>
+	</div>
+
+	<!-- ============================================= -->
+	<!-- ============================================= -->
+	<!-- Formulaire et modals -->
+	<!-- ============================================= -->
+
+	<!-- nom modal -->
+	<ion-modal
+		trigger="modal-nom"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>Nom</ion-title>
+					<ion-button
+					slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+		
+			<ion-content [fullscreen]="true">
+				<form 
+					action=""
+					[formGroup]="nomForm"
+					
+					>
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-input
+								label="Nom"
+								type="text"
+								formControlName= 'nom'
+							></ion-input>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateNom()"
+							[disabled]="nomForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin nom modal ------- -->
+	<!-- ======================================== -->
+	<!-- prenom modal -->
+	<ion-modal
+		trigger="modal-prenom"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+			<ng-template>
+			<ion-toolbar>
+				<ion-title>Prénom</ion-title>
+					<ion-button
+						slot="end"
+						fill="clear"
+						(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+	
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="prenomForm"
+					>
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-input
+								label="Prenom"
+								type="text"
+								formControlName= 'prenom'
+							></ion-input>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updatePrenom()"
+							[disabled]="prenomForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin prenom modal ------- -->
+	<!-- ======================================== -->
+	<!-- genre modal -->
+	<ion-modal
+		trigger="modal-genre"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>Genre</ion-title>
+				<ion-button
+					slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+				
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="genreForm">
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-select
+								formControlName='genre'
+								label="Genre">
+								<ion-select-option value="Homme">Homme</ion-select-option>
+								<ion-select-option value="Femme">Femme</ion-select-option>
+								<ion-select-option value="Autres">Autres</ion-select-option>
+							</ion-select>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateGenre()"
+							[disabled]="genreForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin genre modal ------- -->
+	<!-- ======================================== -->
+	<!-- description madal -->
+	<ion-modal
+		trigger="modal-description"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>Description</ion-title>
+				<ion-button
+					slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+			
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="descriptionForm">
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-input
+								label="Description"
+								type="text"
+								maxlength="40"
+								[counter]="true" 
+								formControlName= 'description'
+							></ion-input>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateDescription()"
+							[disabled]="descriptionForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin description modal ------- -->
+	<!-- ======================================== -->
+	<!-- travail modal -->
+	<ion-modal
+		trigger="modal-travail"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>Profession</ion-title>
+				<ion-button
+					slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+				
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="travailForm">
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-input
+								label="Profession"
+								type="text"
+								formControlName= 'travail'
+							></ion-input>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateTravail()"
+							[disabled]="travailForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin travail modal ------- -->
+	<!-- ======================================== -->
+	<!-- telephone modal -->
+	<ion-modal
+		trigger="modal-telephone"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>Téléphone</ion-title>
+				<ion-button
+					slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+	
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="telephoneForm">
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-input
+								label="Telephone"
+								type="tel"
+								formControlName= 'telephone'
+							></ion-input>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateTelephone()"
+							[disabled]="telephoneForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin telephone modal ------- -->
+	<!-- ======================================== -->
+	<!-- telephone etat civl -->
+	<ion-modal
+		trigger="modal-ecivil"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>État civil</ion-title>
+				<ion-button
+				slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+				
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="ecivilForm">
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-select
+								formControlName='etatCivil'
+								label="Situation amoureuse">
+								<ion-select-option value="Marie.e">Marie.e</ion-select-option>
+								<ion-select-option value="Celibataire">Celibataire</ion-select-option>
+								<ion-select-option value="Autres">Autres</ion-select-option>
+							</ion-select>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateECivil()"
+							[disabled]="ecivilForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin etat civil modal ------- -->
+	<!-- ======================================== -->
+	<!-- ville modal -->
+	<ion-modal
+		trigger="modal-ville"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>Ville</ion-title>
+				<ion-button
+					slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="villeForm">
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-input
+								label="Ville"
+								type="text"
+								formControlName= 'ville'
+							></ion-input>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateVille()"
+							[disabled]="villeForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin ville modal ------- -->
+	<!-- ======================================== -->
+	<!-- commune modal -->
+	<ion-modal
+		trigger="modal-commune"
+		[initialBreakpoint]="1"
+		[breakpoints]="[0,1]">
+		<ng-template>
+			<ion-toolbar>
+				<ion-title>Commune</ion-title>
+				<ion-button
+					slot="end"
+					fill="clear"
+					(click)="close()">
+					<ion-icon name="close-circle-outline"></ion-icon>
+				</ion-button>
+			</ion-toolbar>
+					
+			<ion-content [fullscreen]="true">
+				<form
+					[formGroup]="communeForm">
+					<div class=" mt-8 px-2">
+						<ion-item>
+							<ion-input
+								label="Commune"
+								type="text"
+								formControlName= 'commune'
+							></ion-input>
+						</ion-item>
+					</div>
+					<div
+						class="p-2 absolute bottom-0 w-full">
+						<ion-button
+							slot="center"
+							(click)="updateCommune()"
+							[disabled]="communeForm.invalid"
+							class="submit-btn">
+							Enregistre
+						</ion-button>
+					</div>
+				</form>
+			</ion-content>
+		</ng-template>
+	</ion-modal>
+	<!-- ------- fin commune modal ------- -->
+</ion-content>

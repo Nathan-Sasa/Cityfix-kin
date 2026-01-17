@@ -19,3 +19,11 @@ ion-header {
     width: fit-content !important;
     margin-inline: auto !important;
 }
+
+.message-success{
+    color: var(--color-clr-accent) !important;
+}
+
+.message-error{
+    color: orangered
+}

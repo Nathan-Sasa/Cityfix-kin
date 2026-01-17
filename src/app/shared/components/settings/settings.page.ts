@@ -6,6 +6,8 @@ import { ThemeService } from 'src/app/core/services/theme.service';
 import { addIcons } from 'ionicons';
 import { arrowBack, arrowBackSharp, chevronForward, lockClosed, logOut, moon, moonOutline, personCircle } from 'ionicons/icons';
 import { RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { DetailsProfileComponent } from '../details-profile/details-profile.component';
 
 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -30,9 +32,11 @@ const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 		IonIcon,
 		IonModal,
 		IonTextarea,
+
 		CommonModule, 
 		FormsModule,
-		RouterModule
+		RouterModule,
+		DetailsProfileComponent
 	]
 })
 export class SettingsPage implements OnInit {
@@ -42,7 +46,8 @@ export class SettingsPage implements OnInit {
 
 	constructor(
 		public themeService: ThemeService,
-		private navCtrl: NavController
+		private navCtrl: NavController,
+		private authS: AuthService
 	) {
         addIcons({arrowBack,personCircle,chevronForward,lockClosed,moon, arrowBackSharp, logOut }); 
 	}
@@ -76,5 +81,9 @@ export class SettingsPage implements OnInit {
 		document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
 	}
 
+
+	logout(){
+		this.authS.logout()
+	}
 
 }

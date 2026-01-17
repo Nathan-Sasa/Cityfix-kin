@@ -68,6 +68,7 @@ export class LoginPage implements OnInit {
 			this.authS.login(username!, password!).subscribe({
 				next: () => {
 					console.log("Connexion réussie !")
+					this.form.reset()
 					this.navCtrl.navigateForward('/cityfix-kin/home')
 				},
 				error: (err) => {

@@ -15,7 +15,7 @@
 	<div
 		class="max-w-md mx-auto">
 		<div
-			class="mt-16">
+			class="mt-8">
 			<ion-title
 				class="text-clr-accent font-semibold font-mono register-title">
 				S'enregistrer
@@ -26,7 +26,7 @@
 			[formGroup]="form"
 			(submit)="submit()"
 			action=""
-			class="mx-8! mt-16! flex! flex-col gap-8">
+			class="mx-8! mt-8! flex! flex-col gap-8">
 			<div
 			class="border-2 border-clr-accent px-4 rounded-2xl">
 				<ion-input 
@@ -62,6 +62,23 @@
 					type="password"
 				></ion-input>
 			</div>
+
+			<!-- Erreur ou succes -->
+			<div
+				class="flex justify-center">
+				<ion-text
+					*ngIf="success"
+					class="message-success">
+					{{success}}
+				</ion-text>
+	
+				<ion-text
+					*ngIf="messageError"
+					class="message-error">
+					{{messageError}}
+				</ion-text>
+			</div>
+
 			<div>
 				<ion-button
 					slot="center"
@@ -71,6 +88,7 @@
 				</ion-button>
 			</div>
 		</form>
+		
 
 		<div
 			class="mt-8 flex justify-center">

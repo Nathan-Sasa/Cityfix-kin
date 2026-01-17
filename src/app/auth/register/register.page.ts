@@ -107,13 +107,15 @@ export class RegisterPage implements OnInit {
 
 	loader = false
 	register = false
-	messageError = false
-	success = false
+	messageError = ''
+	success = ''
 
 	submit(){
 		if(this.form.invalid){
 			this.form.markAllAsTouched()
 			console.log("formulaire invalide")
+
+			return
 		}
 
 		this.loader = true
@@ -126,23 +128,32 @@ export class RegisterPage implements OnInit {
 
 			this.authS.register(formValues).subscribe({
 				next: (res) => {
-					console.log("Inscription réussier !")
+					console.log(res.message)
 					this.form.reset()
-					setTimeout(() => {
-						const {username, password} = this.form.value
-						this.authS.login(username!, password!).subscribe({
-							next: () =>{
-								console.log("Connexion réussie !")
-								this.navCtrl.navigateForward('/cityfix-kin/home')
-							},
-							error(err) {
-								console.log("Echec de connexion ! Une erreur est survenue : ", err)
-							},
-						})
-					}, 2000)
+					this.success = res.message;
+					setTimeout(() =>{
+						this.navCtrl.navigateForward('/login')
+					}, 500)
+					// setTimeout(() => {
+					// 	const {username, password} = this.form.value
+					// 	this.authS.login(username!, password!).subscribe({
+					// 		next: () =>{
+					// 			console.log("Connexion réussie !")
+					// 			this.navCtrl.navigateForward('/cityfix-kin/home')
+					// 		},
+					// 		error(err) {
+					// 			console.log("Echec de connexion ! Une erreur est survenue : ", err)
+					// 		},
+					// 	})
+					// }, 2000)
 				},
-				error(err) {
-					console.log("Une erreur est survenue, désolé votre inscription échoué ! Velliez réessayer !")
+				error : (err) => {
+					console.log(err.error?.message || "Une erreur est survenue veillez réessayer !")
+					this.messageError = 
+						err.error?.message || "Une erreur est survenue veillez réessayer !"
+					setTimeout(() => {
+						this.messageError = ''
+					}, 5000)
 				},
 			})
 		}, 2000)

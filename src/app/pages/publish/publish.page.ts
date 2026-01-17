@@ -31,12 +31,12 @@ const takePictureLocation = async () => {
 
 	// geoLocalisation
 	const position = await Geolocation.getCurrentPosition()
-	// const Lat = position.coords.latitude
-	// const Lng = position.coords.longitude
-	// const time = position.timestamp
+	const Lat = position.coords.latitude
+	const Lng = position.coords.longitude
+	const time = position.timestamp
 	// getCurrentPosition(options?: PositionOptions | undefined) => Promise<Position>
 	// console.log('lat :', position.coords.latitude, 'lng :', position.coords.longitude)
-	// console.log('lat :' + Lat, 'lng :' + Lng, 'time :' + time)
+	console.log('lat :' + Lat, 'lng :' + Lng, 'time :' + time)
 }
 
 @Component({
