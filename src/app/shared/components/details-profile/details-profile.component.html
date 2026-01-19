@@ -311,6 +311,7 @@
 						<ion-item>
 							<ion-select
 								formControlName='genre'
+								labelPlacement=""floating
 								label="Genre">
 								<ion-select-option value="Homme">Homme</ion-select-option>
 								<ion-select-option value="Femme">Femme</ion-select-option>
@@ -490,12 +491,18 @@
 					<div class=" mt-8 px-2">
 						<ion-item>
 							<ion-select
-								formControlName='etatCivil'
-								label="Situation amoureuse">
-								<ion-select-option value="Marie.e">Marie.e</ion-select-option>
-								<ion-select-option value="Celibataire">Celibataire</ion-select-option>
+								formControlName='etatCivil' 
+								labelPlacement=""floating
+								label="Situation amoureux">
+								<ion-select-option value="Célibataire">Célibataire</ion-select-option>
+								<ion-select-option value="Marié.e">Marié.e</ion-select-option>
 								<ion-select-option value="Autres">Autres</ion-select-option>
 							</ion-select>
+							<!-- <ion-input
+								formControlName='etatCivil'
+								label="Situation amoureuse"
+							>
+							</ion-input> -->
 						</ion-item>
 					</div>
 					<div

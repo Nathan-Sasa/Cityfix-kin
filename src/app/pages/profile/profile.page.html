@@ -19,13 +19,27 @@
 					class="rounded-full">
 					<ion-img
 						slot="start"
-						src="assets/images/test/test.webp"
-						class="w-30 h-30 rounded-full object-cover overflow-hidden border-4 border-clr-accent/60"
+						[src]="profile.avatar || 'assets/images/site/profileDefault/cityfix_profile.webp'"
+						class="w-24 h-24 rounded-full object-cover overflow-hidden border-4 border-clr-accent/60"
 					></ion-img>
+					<ion-icon name="pencil-sharp" class="image-edit"></ion-icon>
 				</ion-button>
-				<!-- données api recquises -->
 				<ion-badge class="profile-badge">{{profile.status}}</ion-badge>
 			</ion-buttons>
+			<!-- <ion-button
+				id="profile-modal"
+				class="rounded-full"
+				fill="clear">
+				<ion-avatar>
+					<ion-img
+						slot="start"
+						[src]="profile.avatar || 'assets/images/site/profileDefault/cityfix_profile.webp'"
+						class="w-24 h-24 rounded-full object-cover overflow-hidden border-4 border-clr-accent/60"
+					></ion-img>
+				</ion-avatar>
+				<ion-icon name="pencil-sharp" class="image-edit"></ion-icon>
+				<ion-badge class="profile-badge">{{profile.status}}</ion-badge>
+			</ion-button> -->
 		</div>
 		<div
 			class="my-auto px-2">
@@ -33,7 +47,6 @@
 				class=" flex items-center gap-1">
 				<span
 					class="text-2xl lg:text-3xl font-semibold">
-					<!-- données api recquise -->
 					{{profile.username}}
 				</span>
 				<ion-icon 
@@ -126,6 +139,7 @@
 			</div>
 			<div>
 				<ion-list>
+					<!-- ======= modal enfant affichier la photo profile ========= -->
 					<ion-item
 						[button]="true"
 						class="custom-item cursor-pointer"
@@ -133,8 +147,6 @@
 						<ion-icon name="eye" class="custom-icon"></ion-icon>
 						<ion-label>Voir la photo de profile</ion-label>
 					</ion-item>
-
-					<!-- ======= modal enfant pour affichier la photo profile ========= -->
 					<ion-modal
 						trigger="profile-image-modal">
 						<ng-template>
@@ -161,21 +173,42 @@
 								class="ion-page">
 								<div
 									class="h-full w-full flex items-center justify-center">
+									<!-- src="assets/images/test/test.webp" -->
+									<!-- src="https://i.ibb.co/mCwQqJVw/cityfix-profile2clear.png" -->
+									
 									<ion-img 
-										src="assets/images/test/test.webp"
+										[src]="profile.avatar || 'assets/images/site/profileDefault/cityfix_profile.webp'"
 										class="modal-photo-profile"
 									></ion-img>
 								</div>
 							</ion-content>
 						</ng-template>
 					</ion-modal>
-					<!-- ==== modal enfant pour affichier la photo profile === -->
+					
+					<!-- ==== modal enfant modifier la photo profile === -->
+					<input
+						type="file"
+						accept="image/*"
+						hidden
+						#fileInput
+						(change)="onFileSelected($event)"
+					>
+					
+					<ion-item
+						[button]="true"
+						(click)="openFilePicker(fileInput)"
+						class="custom-item cursor-pointer"
+						>
+						<!-- (click)="fileInput.click()" -->
+						<ion-icon name="image-outline" class="custom-icon mr-2"></ion-icon>
+						<ion-label>Changer l'image' de profile</ion-label>
+					</ion-item>
 
 					<ion-item
 						class="custom-item cursor-pointer"
 						[button]="true">
 						<ion-icon name="image-outline" class="custom-icon mr-2"></ion-icon>
-						<ion-label>Changer la photo de profile</ion-label>
+						<ion-label>Supprimer l'image de profile</ion-label>
 					</ion-item>
 
 					<ion-item

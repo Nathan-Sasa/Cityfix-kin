@@ -1,9 +1,9 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonListHeader, IonModal, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, IonBadge, ModalController } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonListHeader, IonModal, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, IonBadge, ModalController, IonInput, IonAvatar } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { lockClosed, person, personCircle, settings, checkmarkCircleOutline, link, eye, close, imageOutline, imagesOutline, imageSharp, information, informationCircleOutline } from 'ionicons/icons';
+import { lockClosed, person, personCircle, settings, checkmarkCircleOutline, link, eye, close, imageOutline, imagesOutline, imageSharp, information, informationCircleOutline, pencilSharp } from 'ionicons/icons';
 
 import { RouterModule } from '@angular/router';
 import { ProfilePostService } from 'src/app/core/services/profilePost.service';
@@ -32,6 +32,8 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 		IonBadge,
 		IonTitle,
 		IonContent,
+		IonAvatar,
+
 		CommonModule, 
 		FormsModule,
 		RouterModule 
@@ -68,8 +70,11 @@ export class ProfilePage implements OnInit {
 		private authS: AuthService,
 		private profileS: ProfileService
 	) {
-		addIcons({checkmarkCircleOutline,settings,link,eye,close,imageOutline,imageSharp,person, personCircle,informationCircleOutline});
+		addIcons({checkmarkCircleOutline,settings,link,eye,close,imageOutline,imageSharp,person, personCircle,informationCircleOutline, pencilSharp});
 	}
+
+	// profile?: IProfile
+	loading = false
 
 	ngOnInit() {
 		this.Profile()
@@ -84,16 +89,11 @@ export class ProfilePage implements OnInit {
 		})
 	}
 
-	// getProfile(){
-	// 	this.profileS.getProfile().subscribe(res => {
-	// 			this.profile = res
-	// 		}
-	// 	)
-	// }
 	Profile(){
 		this.profileS.getProfile().subscribe({
 			next: (res) =>{
 				this.profile = res
+				console.log("données recus : ", res)
 			},
 			error(err) {
 				console.log("données non recus : ", err)
@@ -122,5 +122,44 @@ export class ProfilePage implements OnInit {
 	//  modalCtrl ===========
 	closeModal(){
 		this.modal.dismiss();
+	}
+
+	openFilePicker(fileInput: HTMLInputElement){
+		fileInput.click()
+	}
+
+	onFileSelected(event: Event){
+		const input = event.target as HTMLInputElement
+		if(!input.files?.length) return
+
+		const file = input.files[0]
+
+		if(!file.type.startsWith('image/')){
+			alert('Fichier invalide')
+			return
+		}
+
+		this.loading = true
+		this.profileS.uploadAvatar(file).subscribe({
+			next: (profile) =>{
+				// this.profile = profile
+				this.loading = false
+			},
+			error: (err) =>{
+				this.loading = false
+				console.log('Erreur lors du téléchargement de l\'image', err)
+			}
+		})
+	}
+
+	deleteAvatar(){
+		this.profileS.deleteAvatar().subscribe({
+			next: (profile) =>{
+				// this.profile = profile
+			},
+			error: (err) =>{
+				console.log('Erreur lors de la suppression de l\'image', err)
+			}
+		})
 	}
 }

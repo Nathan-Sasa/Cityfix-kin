@@ -10,6 +10,8 @@ import { IBio, IProfile } from "../interfaces/interfaces.interface";
 
 export class ProfileService {
 
+    private profileData:IProfile = <IProfile>{}
+    private bioData:IBio = <IBio>{}
 
     constructor(
         private http: HttpClient
@@ -17,20 +19,15 @@ export class ProfileService {
 
     private readonly apiPrefix = environment.profileApi
 
-
-
-    // getProfile(): Observable<IProfile[]>{
-    //     return this.http.get<IProfile[]>(`${this.apiPrefix}/moi`)
-    // }
     getProfile(){
         return this.http.get<IProfile>(`${this.apiPrefix}/moi`).pipe(
-            tap(data => console.log("Profile ok : "))
+            tap(data => this.profileData = data)
         )
     }
 
     getBio(){
         return this.http.get<IBio>(`${this.apiPrefix}/moi/bio`).pipe(
-            tap(data => console.log("Bio ok", data))
+            tap(data => this.bioData = data)
         )
     }
 
@@ -38,4 +35,12 @@ export class ProfileService {
         return this.http.patch<IBio>(`${this.apiPrefix}/moi/bio/update/${id}`, bio)
     }
 
+    uploadAvatar(file: File): Observable<IProfile>{
+        const formData = new FormData();
+        formData.append('image', file);
+        return this.http.patch<IProfile>(`${this.apiPrefix}/moi/avatar/upload`, formData)
+    }
+    deleteAvatar() {
+        return this.http.delete<IProfile>(`${this.apiPrefix}/moi/avatar/delete`)
+    }
 }

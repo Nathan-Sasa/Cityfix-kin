@@ -86,8 +86,8 @@ export class DetailsProfileComponent  implements OnInit {
 		})
 		this.telephoneForm = this.fb.group({
 			telephone: ['', [
-				Validators.required
-				// Validators.pattern(/^[0-9]{9,}$/)
+				Validators.required,
+				Validators.pattern(/^[0-9]{9,}$/)
 			]]
 		})
 		this.villeForm = this.fb.group({
@@ -108,7 +108,7 @@ export class DetailsProfileComponent  implements OnInit {
 		this.travailForm = this.fb.group({
 			travail: ['', [
 				Validators.required,
-				Validators.minLength(10)
+				Validators.minLength(5)
 			]]
 		})
 	}
@@ -221,7 +221,7 @@ export class DetailsProfileComponent  implements OnInit {
 				this.close()
 			},
 			error: (err) =>{
-				console.log("Erreur du mise à jour de 'Numéro de téléphone'", err)
+				console.log("Erreur du mise à jour de 'Numéro de téléphone'")
 			}
 		})
 	}
@@ -261,11 +261,11 @@ export class DetailsProfileComponent  implements OnInit {
 	}
 	updateECivil():void{
 		const id = this.bio.id
-		if(this.communeForm.invalid){
+		if(this.ecivilForm.invalid){
 			console.log("Formulaire invalid ")
 			return
 		}
-		const formValue = this.communeForm.value
+		const formValue = this.ecivilForm.value
 		this.profileS.updateBio(+id!, formValue).subscribe({
 			next: (res) =>{
 				console.log("État civil mise à jour")

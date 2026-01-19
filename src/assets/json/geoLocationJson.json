@@ -82,5 +82,17 @@
         "Cne": "Limete",
         "Vll": "Kinshasa",
         "stt": "Résolu"
+    },
+    {
+        "LocId": 8,
+        "Lng": 15.509360309999995,
+        "Lat": -4.346268169999998,
+        "Desc": "Camion abandonné",
+        "Img": "https://infos27.cd/wp-content/uploads/2025/12/IMG-20251209-WA0013.jpg",
+        "Av": "Avenue n'sele",
+        "Qtr": "N'sele",
+        "Cne": "Limete",
+        "Vll": "Kinshasa",
+        "stt": "Résolu"
     }
 ]
