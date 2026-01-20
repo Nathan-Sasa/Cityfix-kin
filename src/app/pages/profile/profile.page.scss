@@ -15,7 +15,7 @@ ion-list-header{
 .image-edit{
     position: absolute;
     bottom: 25%;
-    right: 1px;
+    right: -5px;
     background: var(--ion-background-color);
     border-radius: 50%;
     padding: 3px;
@@ -76,7 +76,7 @@ ion-item {
 // ***************** modals styles ****************************
 // profile modale ********************************
 .profile-modal{
-    --height: 210px;
+    --height: 260px;
     --border-radius: 16px 16px 0 0;
 }
 .profile-modal ion-list{
@@ -98,7 +98,6 @@ ion-item {
     --margin-inline: auto;
 }
 .modal-photo-profile{
-
     min-height: 200px;
     height: 400px;
 }

@@ -1,9 +1,9 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonImg, IonItem, IonLabel, IonList, IonListHeader, IonModal, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar, IonBadge, ModalController, IonInput, IonAvatar } from '@ionic/angular/standalone';
+import { IonButton, IonButtons, IonContent, IonIcon, IonImg, IonItem, IonLabel, IonList, IonModal, IonTitle, IonToolbar, IonBadge, ModalController, IonToast, IonLoading, ToastController, LoadingController } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { lockClosed, person, personCircle, settings, checkmarkCircleOutline, link, eye, close, imageOutline, imagesOutline, imageSharp, information, informationCircleOutline, pencilSharp } from 'ionicons/icons';
+import { person, personCircle, settings, checkmarkCircleOutline, link, eye, close, imageOutline, imageSharp, informationCircleOutline, pencilSharp } from 'ionicons/icons';
 
 import { RouterModule } from '@angular/router';
 import { ProfilePostService } from 'src/app/core/services/profilePost.service';
@@ -32,24 +32,12 @@ import { ProfileService } from 'src/app/core/services/profile.service';
 		IonBadge,
 		IonTitle,
 		IonContent,
-		IonAvatar,
 
 		CommonModule, 
 		FormsModule,
 		RouterModule 
 	]
 })
-
-// selfPostJson
-// "reply": [
-// 	{
-// 	"name": "Jonathan Sasa",
-// 	"status": "Citoyen",
-// 	"message": "Oui, j'ai aussi vu cette route degradé en rentrant à la maison. Ça pénalise vraiment la circulation",
-// 	"replyLike": 43,
-// 	"replyDate": "12-12-2025"
-// 	}
-// ]
 
 export class ProfilePage implements OnInit {
 
@@ -58,17 +46,14 @@ export class ProfilePage implements OnInit {
 	theme = localStorage.getItem('theme')
 	isDark =false
 
-	// profile = signal({
-	// 	name: this.authS.getUsernameFromToken(),
-	// 	email: this.authS.getEmailFromToken()
-	// })
-
 	constructor(
 		private profileProstService: ProfilePostService,
 		private themeService : ThemeService,
 		private modal: ModalController,
 		private authS: AuthService,
-		private profileS: ProfileService
+		private profileS: ProfileService,
+		private toastCtrl: ToastController,
+		private loadingCtrl: LoadingController
 	) {
 		addIcons({checkmarkCircleOutline,settings,link,eye,close,imageOutline,imageSharp,person, personCircle,informationCircleOutline, pencilSharp});
 	}
@@ -87,16 +72,24 @@ export class ProfilePage implements OnInit {
 			)
 			console.log(isDark)
 		})
+
+		console.log("Token valid ? :", this.authS.hasValidToken())
+		console.log("Is loggedIn? :", this.authS.isLoggedIn())
 	}
+
+
+	// ionViewDidEnter(){
+	// 	this.Profile()
+	// }
 
 	Profile(){
 		this.profileS.getProfile().subscribe({
 			next: (res) =>{
 				this.profile = res
-				console.log("données recus : ", res)
+				console.log("données recus : ")
 			},
 			error(err) {
-				console.log("données non recus : ", err)
+				console.log("données non recus : ")
 			},
 		})
 	}
@@ -124,6 +117,42 @@ export class ProfilePage implements OnInit {
 		this.modal.dismiss();
 	}
 
+	// Upload photo de profile ======================================
+	// =======================================================
+
+	// loading et toast -----------------------------
+	async showLoading(){
+		const loading = await this.loadingCtrl.create({
+			message: "Chargement...",
+			translucent: true,
+			cssClass: 'custom-class custom-loading'
+		})
+		await loading.present();
+	}
+
+	// taost
+	// success
+	async showToastSuccess(){
+		const toast = await this.toastCtrl.create({
+			message: 'Photo de profile mise à jour avec succès !',
+			duration: 3000,
+			color: 'success',
+			position: 'top'
+		});
+		await toast.present();
+	}
+
+	// failed
+	async showToastFailed(){
+		const toast = await this.toastCtrl.create({
+			message: 'Échec de la mise à jour de la photo de profile.',
+			duration: 3000,
+			color: 'danger',
+			position: 'top'
+		});
+		await toast.present();
+	}
+	// ----------------------------------------------------------
 	openFilePicker(fileInput: HTMLInputElement){
 		fileInput.click()
 	}
@@ -140,18 +169,31 @@ export class ProfilePage implements OnInit {
 		}
 
 		this.loading = true
+		if(this.loading === true){
+			this.showLoading()
+		}
 		this.profileS.uploadAvatar(file).subscribe({
 			next: (profile) =>{
-				// this.profile = profile
-				this.loading = false
+				setTimeout(() => {
+					this.Profile()
+					
+					this.loading = false
+					this.closeModal()
+					this.loadingCtrl.dismiss()
+					this.showToastSuccess()
+				}, 1000)
 			},
 			error: (err) =>{
+				this.showToastFailed()
 				this.loading = false
 				console.log('Erreur lors du téléchargement de l\'image', err)
 			}
 		})
 	}
+	// ======================================================
 
+	// Delete photo de profile ======================================
+	// ======================================================
 	deleteAvatar(){
 		this.profileS.deleteAvatar().subscribe({
 			next: (profile) =>{

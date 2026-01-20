@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validator, Validators } from '@angular/forms';
-import { IonContent, IonButton, IonIcon, IonList, IonItem, IonInput, IonText, IonTextarea, IonModal, ModalController, IonImg, IonToolbar, LoadingController, ToastController } from '@ionic/angular/standalone';
+import { IonContent, IonButton, IonIcon, IonList, IonItem, IonInput, IonText, IonTextarea, IonModal, ModalController, IonImg, IonToolbar, LoadingController, ToastController, IonicSafeString } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { HeaderComponent } from 'src/app/shared/layout/header/header.component';
 import { arrowBack, camera, cameraReverse } from 'ionicons/icons';
@@ -9,35 +9,9 @@ import { arrowBack, camera, cameraReverse } from 'ionicons/icons';
 // plugins capacitor
 import { Camera, CameraResultType } from '@capacitor/camera'
 import { Geolocation } from '@capacitor/geolocation'
-// import { PositionOptions } from 'maplibre-gl';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
-const takePictureLocation = async () => {
-
-	// photo
-  	const image = await Camera.getPhoto({
-		quality: 90,
-		allowEditing: true,
-		resultType: CameraResultType.Uri
-	});
-
-	var imageUrl = image.webPath;
-
-	const imageElement = document.getElementById('imgPublish') as HTMLImageElement
-	
-	if(imageElement && imageUrl){
-		imageElement.src = imageUrl
-		console.log('image url src :', imageElement)
-	}
-
-	// geoLocalisation
-	const position = await Geolocation.getCurrentPosition()
-	const Lat = position.coords.latitude
-	const Lng = position.coords.longitude
-	const time = position.timestamp
-	// getCurrentPosition(options?: PositionOptions | undefined) => Promise<Position>
-	// console.log('lat :', position.coords.latitude, 'lng :', position.coords.longitude)
-	console.log('lat :' + Lat, 'lng :' + Lng, 'time :' + time)
-}
 
 @Component({
 	selector: 'app-publish',
@@ -64,28 +38,31 @@ const takePictureLocation = async () => {
 })
 export class PublishPage implements OnInit {
 
+	private readonly postApi = environment.postApi
+
 	publish = signal({
 		title: 'Cityfix',
 		page: 'publish'
 	})
 
-	photo = takePictureLocation
+	imagePath: string | null = null
+	lat: number | null = null
+	lng: number | null = null
 
 	title = signal('')
 	description = signal('')
 
 	fb = inject(FormBuilder)
 	form = this.fb.group({
-		formTitle : [this.title(), [Validators.required]],
-		formDescription: [this.description(), [Validators.required]]
+		title : [this.title(), [Validators.required]],
+		content: [this.description(), [Validators.required]]
 	})
-
-	
 
 	constructor(
 		private modalCtrl: ModalController,
 		private loadingCtrl: LoadingController,
-		private toastCtrl: ToastController
+		private toastCtrl: ToastController,
+		private http: HttpClient
 	) { 
 		addIcons({camera,cameraReverse, arrowBack});
 	}
@@ -94,45 +71,99 @@ export class PublishPage implements OnInit {
 	isLoading: boolean = false;
 
 	ngOnInit() {
+		this.getFormValue()
 	}
 
 	closeModal(){
 		this.modalCtrl.dismiss()
 	}
 
-	async showLoading(){
-		const loading = await this.loadingCtrl.create({
-			message: 'Chargement...',
-			duration: 5000
-		})
-		await loading.present()
-	}
-
-	async showToast(){
+	async showToast(mess: string | IonicSafeString | undefined) {
 		const toast = await this.toastCtrl.create({
-			message: 'Il semble avoir un soucis, assurez-vous que vous être connecté à un réseau !',
+			message: mess,
 			duration: 3000,
-			position: 'top'
+			position: 'top',
+			color: 'danger'
 		})
 		await toast.present()
 	}
 
 
-	submit(){
+	async takePictureLocation() {
+		// photo
+		const image = await Camera.getPhoto({
+			quality: 90,
+			allowEditing: true,
+			resultType: CameraResultType.Uri
+		});
 
-		if(this.form.invalid) return
-
-		this.isLoading = true
-
-		if(this.isLoading === true){
-			setTimeout(()=>{
-				this.showLoading()
-				setTimeout(()=>{
-					this.isLoading = false
-					this.showToast()
-				}, 5500)
-			}, 200)
+		if(!image.webPath) {
+			console.error("No image path returned");
+			return;
 		}
+
+		this.imagePath = image.webPath ?? null;
+
+		// preview image
+		const img = document.getElementById('imgPublish') as HTMLImageElement
+		if(img && this.imagePath) {
+			img.src = this.imagePath;
+		}
+
+		// geoLocalisation
+		const position = await Geolocation.getCurrentPosition()
+		this.lat = position.coords.latitude
+		this.lng = position.coords.longitude
+		console.log('lat :' + this.lat, 'lng :' + this.lng)
 	}
 
+	getFormValue(){
+		this.form.patchValue({
+			title: this.title(),
+			content: this.description()
+		})
+	}
+
+	async submit() {
+		if (
+			this.form.invalid || 
+			this.imagePath === null || 
+			this.lat === null || 
+			this.lng === null
+		) {
+			console.log(`Form invalid or missing data:
+				Form valid: ${this.form.valid},
+				Image path: ${this.imagePath},
+				Latitude: ${this.lat},
+				Longitude: ${this.lng}`);
+			const cerrMess = 'Veuillez remplir tous les champs et ajouter une image avant de soumettre le signalement.'
+			this.showToast(cerrMess)
+			return
+		}
+
+		const loading = await this.loadingCtrl.create({
+			message: "Signalement encours..."
+		})
+		await loading.present()
+
+		try{
+			const response = await fetch(this.imagePath)
+			const blob = await response.blob()
+
+			const formData = new FormData()
+			formData.append('image', blob, 'signalement.jpg')
+			formData.append('title', this.form.value.title !)
+			formData.append('content', this.form.value.content !)
+			formData.append('lat', this.lat.toString())
+			formData.append('lng', this.lng.toString())
+
+			await this.http.post(`${this.postApi}/post`, formData).toPromise()
+			await loading.dismiss()
+			await this.modalCtrl.dismiss()
+		} catch (err) {
+			await loading.dismiss()
+			const cerrMess = 'Erreur lors de la soumission du signalement.'
+			this.showToast(cerrMess)
+		}
+	}
 }

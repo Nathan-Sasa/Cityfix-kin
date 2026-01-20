@@ -9,9 +9,7 @@ export const authGuard: CanActivateFn = () => {
     const navCtrl = inject(NavController)
 
     if (!auth.hasValidToken() || !auth.isLoggedIn()) {
-        // router.navigate(['/login'])
         console.log("tokenValid : ",auth.hasValidToken(), 'loggedIn: ', auth.isLoggedIn())
-        // router.parseUrl('/landing')
         router.navigateByUrl('/landing')
         return false
 

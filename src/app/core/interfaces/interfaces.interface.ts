@@ -20,3 +20,11 @@ export interface IBio {
     etatCivil?: string;
     travail?: string;
 }
+
+export interface IPost {
+    image?: string;
+    title?: string;
+    content?: string;
+    lat: number;
+    lng: number;
+}

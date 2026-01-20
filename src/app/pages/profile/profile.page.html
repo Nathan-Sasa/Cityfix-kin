@@ -173,9 +173,6 @@
 								class="ion-page">
 								<div
 									class="h-full w-full flex items-center justify-center">
-									<!-- src="assets/images/test/test.webp" -->
-									<!-- src="https://i.ibb.co/mCwQqJVw/cityfix-profile2clear.png" -->
-									
 									<ion-img 
 										[src]="profile.avatar || 'assets/images/site/profileDefault/cityfix_profile.webp'"
 										class="modal-photo-profile"
@@ -204,8 +201,10 @@
 						<ion-label>Changer l'image' de profile</ion-label>
 					</ion-item>
 
+					<!-- ==== modal enfant modifier la photo profile === -->
 					<ion-item
 						class="custom-item cursor-pointer"
+						(click)="deleteAvatar()"
 						[button]="true">
 						<ion-icon name="image-outline" class="custom-icon mr-2"></ion-icon>
 						<ion-label>Supprimer l'image de profile</ion-label>

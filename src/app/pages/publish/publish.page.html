@@ -6,8 +6,9 @@
 			slot="true"
 			class="camera-btn"
 			id="pub-modal"
-			(click)="photo()"
+			(click)="takePictureLocation()"
 			>
+			<!-- (click)="photo()" -->
 			<ion-icon name="camera" class="text-6xl"></ion-icon>
 		</ion-button>
 	</div>
@@ -84,8 +85,7 @@
 									placeholder="Enter text"
 									maxlength="40"
 									[counter]="true" 
-									formControlName="formTitle"
-									[value]="title()"
+									formControlName="title"
 									class="title-input"
 								></ion-input>
 							</ion-item>
@@ -96,8 +96,7 @@
 									[counter]="true" 
 									[autoGrow]="true"
 									maxlength="150"
-									formControlName="formDescription"
-									[value]="description()"
+									formControlName="content"
 									clear-input="true"
 									class="descript-area"
 								></ion-textarea>

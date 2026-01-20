@@ -148,10 +148,7 @@ export class AuthService {
     isTokenExpired(token?: string): boolean {
         const payload = this.decodeJwtPayload(token)
 
-        if(!payload || !payload.exp){
-            this.logout()
-            return true
-        }
+        if(!payload || !payload.exp) return true
         
         const nowSec = Math.floor(Date.now() / 1000)
         return payload.exp < nowSec
@@ -159,7 +156,6 @@ export class AuthService {
 
     hasValidToken(): boolean{
         const t = this.getToken()
-
         return !!t && !this.isTokenExpired(t)
     }
 

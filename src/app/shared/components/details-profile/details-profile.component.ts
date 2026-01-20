@@ -59,7 +59,7 @@ export class DetailsProfileComponent  implements OnInit {
 	}
 
 	ngOnInit() {
-		this.getBio()
+		// this.getBio()
 
 		this.nomForm = this.fb.group({
 			nom: ['', [
@@ -111,6 +111,10 @@ export class DetailsProfileComponent  implements OnInit {
 				Validators.minLength(5)
 			]]
 		})
+	}
+
+	ionViewDidEnter(){
+		this.getBio()
 	}
 
 	close(){
