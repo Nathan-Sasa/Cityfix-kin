@@ -27,7 +27,14 @@ export const routes: Routes = [
 			{
 				path: 'home',
 				loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage),
-				canActivate: [authGuard]
+				canActivate: [authGuard],
+				// children: [
+				// 	{
+				// 		path: 'feed/map/:id',
+				// 		loadComponent: () => import('./shared/components/feed-map/feed-map.page').then( m =>m.FeedMapPage),
+				// 		canActivate: [authGuard]
+				// 	}
+				// ]
 			},
 			{
 				path: 'map',
@@ -51,6 +58,12 @@ export const routes: Routes = [
 			}
 		]
 	},
+	// profile paths ==============================================
+	{
+		path: 'cityfix-kin/profile/settings',
+		loadComponent: ()=> import('./shared/components/settings/settings.page').then(m=> m.SettingsPage),
+		canActivate: [authGuard]
+	},
 
 	// map geoLocation paths =====================================
 	{
@@ -58,11 +71,9 @@ export const routes: Routes = [
 	  loadComponent: () => import('./pages/geo-details/geo-details.page').then( m => m.GeoDetailsPage),
 	  canActivate: [authGuard]
 	},
-
-	// profile paths ==============================================
 	{
-		path: 'cityfix-kin/profile/settings',
-		loadComponent: ()=> import('./shared/components/settings/settings.page').then(m=> m.SettingsPage),
+		path: 'cityfix-kin/home/feed/map/:id',
+		loadComponent: () => import('./shared/components/feed-map/feed-map.page').then( m =>m.FeedMapPage),
 		canActivate: [authGuard]
 	},
 	{
@@ -70,7 +81,6 @@ export const routes: Routes = [
 		loadComponent: () => import('./shared/components/profile-post-map/profile-post-map.page').then( m => m.ProfilePostMapPage),
 		canActivate: [authGuard]
 	},
-
 
 	{
 		path: '',
@@ -81,4 +91,5 @@ export const routes: Routes = [
 		path: '**',
 		loadComponent: () => import('./pages/not-found/not-found.page').then(m => m.NotFoundPage)
 	},
+  
 ];

@@ -2,3 +2,7 @@ ion-tab-button{
     --color-focused: var(--color-clr-accent) !important;
     --color-selected: var(--color-clr-accent) !important;
 }
+
+ion-tab-bar{
+    border-top: 1px solid rgba(83, 66, 195, 0.26);
+}

@@ -1,0 +1,59 @@
+.feed-header{
+    --background: var(--ion-color-light-shade);
+    box-shadow: none;
+    border: 1px solid rgba(83, 66, 195, 0.26);
+    height: 40px;
+}
+
+.feed-card{
+    box-shadow: none;
+    // border: 1px solid rgba(83, 66, 195, 0.26);
+    margin-bottom: 5px;
+}
+
+.feed-card-header{
+    --padding-start: 10px;
+    --padding-end: 10px;
+}
+
+.feed-avatar-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--color-clr-accent);
+}
+
+.feed-content-image{
+    min-height: 250px;
+    max-height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    // border: 1px solid var(--color-clr-accent);
+}
+
+.feed-img{
+    background: cover;
+    filter: blur(0);
+    transition: filter 0.4s ease;
+}
+
+.icon-map{
+    color: var(--color-clr-accent);
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.signale{
+    --color: #4f57c4;
+    background: transparent;
+}
+
+.encours{
+    --color: #f59e0b;
+    background: transparent;
+}
+
+.resolu{
+    --color: #22c55e;
+    background: transparent;
+}

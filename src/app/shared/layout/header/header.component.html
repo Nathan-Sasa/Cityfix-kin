@@ -1,11 +1,15 @@
 <ion-header [translucent]="true">
 	<ion-toolbar
 		class="p-2">
-		<ion-title
-			class="font-mono font-semibold text-clr-accent text-xl mt-1">
-			{{name().title}}
-			<p class="text-xs font-mono">{{name().page}}</p>
-		</ion-title>
+		<div
+			class="flex items-center">
+			<!-- <ion-img src="{{name().logo}}"></ion-img> -->
+			<ion-title
+				class="font-mono font-semibold text-clr-accent text-xl mt-1">
+				{{name().title}}
+				<p class="text-xs font-mono">{{name().page}}</p>
+			</ion-title>
+		</div>
 		<ion-buttons
 			slot="end"
 			fill="clear">

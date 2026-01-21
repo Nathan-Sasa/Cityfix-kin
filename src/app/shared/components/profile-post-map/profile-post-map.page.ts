@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonButton, IonContent, IonHeader, IonTitle, IonToolbar, NavController, IonIcon } from '@ionic/angular/standalone';
 import { IProfilePost } from 'src/app/core/interfaces/geoLocation.interface';
 
-import maplibregl, { NumberArray } from 'maplibre-gl'
-import { FeatureCollection, Point } from 'geojson';
+import maplibregl from 'maplibre-gl'
 import { ProfilePostService } from 'src/app/core/services/profilePost.service';
 import { ThemeService } from 'src/app/core/services/theme.service';
 import { ActivatedRoute } from '@angular/router';

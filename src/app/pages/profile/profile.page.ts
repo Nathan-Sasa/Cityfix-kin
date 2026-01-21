@@ -73,8 +73,8 @@ export class ProfilePage implements OnInit {
 			console.log(isDark)
 		})
 
-		console.log("Token valid ? :", this.authS.hasValidToken())
-		console.log("Is loggedIn? :", this.authS.isLoggedIn())
+		// console.log("Token valid ? :", this.authS.hasValidToken())
+		// console.log("Is loggedIn? :", this.authS.isLoggedIn())
 	}
 
 
@@ -86,10 +86,10 @@ export class ProfilePage implements OnInit {
 		this.profileS.getProfile().subscribe({
 			next: (res) =>{
 				this.profile = res
-				console.log("données recus : ")
+				// console.log("données recus : ")
 			},
 			error(err) {
-				console.log("données non recus : ")
+				console.log("données non recus : ", err)
 			},
 		})
 	}

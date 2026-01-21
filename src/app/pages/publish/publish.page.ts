@@ -42,7 +42,8 @@ export class PublishPage implements OnInit {
 
 	publish = signal({
 		title: 'Cityfix',
-		page: 'publish'
+		page: 'publish',
+		logo: 'assets/images/site/logo/Cityfix_logo/Cityfix_logo.webp'
 	})
 
 	imagePath: string | null = null

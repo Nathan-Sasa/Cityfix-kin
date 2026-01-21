@@ -1,9 +1,74 @@
 <app-header [name]="home"></app-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding-top">
+	<ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    	<ion-refresher-content></ion-refresher-content>
+  	</ion-refresher>
+	<!-- <ion-header class="feed-header">
+		<ion-toolbar>
+			<ion-title size="large">home</ion-title>
+		</ion-toolbar>
+	</ion-header> -->
+	<!-- <ion-toolbar>
+		<ion-title>home</ion-title>
+	</ion-toolbar> -->
+
+	<div>
+		<ion-card
+			*ngFor="let f of feed()"
+			class="feed-card">
+			<ion-card-header
+				class="feed-card-header">
+				<div 
+					class="flex items-start px-2 py-1 pt-3 gap-x-1 relative"
+					>
+					<ion-avatar slot="start">
+						<ion-img 
+							[src]="f.user.avatar || 'assets/images/site/profileDefault/cityfix_profile.webp'"
+							class="feed-avatar-image">
+						</ion-img>
+					</ion-avatar>
+					<div>
+						<ion-card-title>{{f.user.username}}</ion-card-title>
+						<ion-card-subtitle>
+							{{f.user.userStatus}}
+						</ion-card-subtitle>
+					</div>
+				</div>
+			</ion-card-header>
+			<ion-card-content>
+				<img 
+					[src]="f.image" class="feed-content-image objectif-fit feed-img"
+					[style.backgroundImage]="'url(' + f.imageBlur + ')'"
+				/>
+				<!-- <ion-img [src]="f.image" class="feed-content-image objectif-fit"></ion-img> -->
+			</ion-card-content>
+			<ion-card-content>
+				{{f.content}}
+				<br />
+				<br/>
+				<div class="flex items-start justify-between">
+					<div>
+						<ion-card-title>
+							{{f.title}}
+						</ion-card-title>
+						<ion-card-subtitle>{{f.createdAt | date}}</ion-card-subtitle>
+						<ion-badge
+							[ngClass]="getStatusClass(f.status)">
+							{{f.status | lowercase}}
+						</ion-badge>
+					</div>
+					<ion-button 
+						fill="clear" 
+						slot="end"
+						[routerLink]="['/cityfix-kin/home/feed/map', f.id]">
+						<ion-icon 
+							name="map-sharp" 
+							class="icon-map"
+						></ion-icon>
+					</ion-button>
+				</div>
+			</ion-card-content>
+		</ion-card>
+	</div>
 </ion-content>

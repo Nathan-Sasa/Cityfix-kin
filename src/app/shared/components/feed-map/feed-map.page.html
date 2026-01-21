@@ -1,20 +1,19 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-	<ion-button
+	<ion-toolbar>
+		<ion-button
 		(click)="back()"
 		slot="start"
 		fill="clear">
 		<ion-icon name="arrow-back"></ion-icon>
 	</ion-button>
     <ion-title>map</ion-title>
-	<!-- <span>Cordonnées: {{[mapData.Lng, mapData.Lat]}}</span> -->
-  </ion-toolbar>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 	<div class="map-wrapper">
 		<div 
-			#profileMapContainer
-			class="profile-map-container"></div>
+			#feedMapContainer
+			class="feed-map-container"></div>
 	</div>
 </ion-content>

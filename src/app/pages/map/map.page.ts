@@ -30,7 +30,8 @@ export class MapPage implements OnInit {
 
 	map =  signal({
 		title: 'Cityfix',
-		page: 'map'
+		page: 'map',
+		logo: 'assets/images/site/logo/Cityfix_logo/Cityfix_logo.webp'
 	})
 
 	isDark = false
